@@ -48,7 +48,7 @@ class Harmony(discord.Client):
         self.loop.run_until_complete(self.logout())
 
     def _sanitizeMessage(self, message):
-        return message.lower().split(' ')
+        return message.lower()
 
     async def on_message(self, message):
         ### Temporary
@@ -72,5 +72,5 @@ class Harmony(discord.Client):
 
 
 if __name__ == "__main__":
-    H = Harmony('')
+    H = Harmony('MjU2MTU0OTQ4NzM0MTU2ODAx.DsedEQ.0VEvMOv490CdBTVJHY7iOyPh2Bw')
     H.activate()

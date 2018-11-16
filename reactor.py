@@ -77,4 +77,4 @@ class Reactor(object):
         """
         for snippet in BUTT_INS:
             if snippet in self.message:
-                return snippet.get(snippet)
+                return BUTT_INS.get(snippet)
