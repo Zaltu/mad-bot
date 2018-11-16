@@ -1,7 +1,7 @@
 """
 VERY mad bot responding at incredibly hihg speeds
 """
-from consts import BASIC_RETORTS, BUTT_INS, USERID
+from consts import USERID, COMMAND_KEYWORDS
 
 
 class Reactor(object):
@@ -11,70 +11,32 @@ class Reactor(object):
     def __init__(self):
         self.message = ""
 
-    def process(self, message):
+    def process(self, text):
         """
-        Recieve and process text message
+        Filter for the incoming text message to parse it along Aigis' lines.
 
-        :param str message: message to process
+        :param str text: input text
 
-        :returns: any "regex" matched answers
+        :returns: message to post, if applicable
         :rtype: str|None
         """
-        self.message = message
-        return self._pseudoRegex()
+        self.message = text
+        words = set(text.split(" "))
+        most = 0
+        command = None
+        for key in COMMAND_KEYWORDS:
+            intNum = len(set(key.split(" ")).intersection(words))
+            if len(key.split(" ")) == intNum and  most < intNum or (most == intNum and \
+                    len(set(key.split(" "))) < len(set(command.split(" "))) if command else 0):
+                print (key, intNum)
+                print len(key.split(" "))
+                most = intNum
+                command = key
 
-    def _isMentioned(self):
-        """
-        Check if the bot was mentioned in the message
+        if command:
+            return COMMAND_KEYWORDS[command]()
 
-        :returns: if the bot was @ed
-        :rtype: bool
-        """
-        if USERID in self.message:
-            return True
-        return False
 
-    def _pseudoRegex(self):
-        """
-        prioritize the types of responses. Not a real regex.
-
-        :returns: forwards the text returns of each response type
-        :rtype: str|None
-        """
-        if self._isMentioned():
-            return self._retort() or self._beUseful()
-        else:
-            return self._butt()
-
-    def _retort(self):
-        """
-        Finds any basic retorts
-
-        :returns: retort
-        :rtype: str|None
-        """
-        for snippet in BASIC_RETORTS:
-            if snippet in self.message:
-                return BASIC_RETORTS.get(snippet)
-
-    def _butt(self):
-        """
-        Butts into conversations
-
-        :returns: meme phrase
-        :rtype: str|None
-        """
-        for snippet in BUTT_INS:
-            if snippet in self.message:
-                return BUTT_INS.get(snippet)
-
-    def _beUseful(self):
-        """
-        Any real functionality returns from here
-
-        :returns: useful answer to legit question
-        :rtype: str|None
-        """
-        for snippet in BUTT_INS:
-            if snippet in self.message:
-                return BUTT_INS.get(snippet)
+if __name__ == "__main__":
+    R = Reactor()
+    print R.process(".persona")
