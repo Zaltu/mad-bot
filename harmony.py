@@ -72,5 +72,5 @@ class Harmony(discord.Client):
 
 
 if __name__ == "__main__":
-    H = Harmony('MjU2MTU0OTQ4NzM0MTU2ODAx.DsedEQ.0VEvMOv490CdBTVJHY7iOyPh2Bw')
+    H = Harmony('')
     H.activate()
