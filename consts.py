@@ -18,20 +18,21 @@ GENERAL = "337753641299738624"
 
 
 COMMAND_KEYWORDS = {
-    "hewwo?": lambda: "*notices {author}* OwO who's this?",
-    "lol": lambda: "lmaonade",
-    "brigitte": lambda: "bRrRrAgUeTtE XD XD",
-    "dcpls": lambda: "SIGKILL",
-    "*poke*": lambda: "*poke*",
-    "omae wa mou shindeiru": lambda: "NANI!?",
-    "booli": lambda: ":luigina:",
-    USERID+" who you love": lambda: "I only love "+ZALTU,
-    USERID+" do you love me": lambda: "I only love "+ZALTU,
-    USERID+" who you not love": lambda: "You.",
-    USERID+" who you don't love": lambda: "You.",
-    USERID+" who you dont love": lambda: "You.",
-    USERID+" ur mom gay lol": lambda: "no u",
-    USERID+" you know what time it is": lambda: "{author} time to get a new watch",
-    ".persona": actions.nyx,
-    ".owo": actions.owo
+    "hewwo?": lambda body: body.text("*notices {author}* OwO who's this?"),
+    "lol": lambda body: body.text("lmaonade"),
+    "brigitte": lambda body: body.text("bRrRrAgUeTtE XD XD"),
+    "dcpls": lambda body: body.text("SIGKILL"),
+    "*poke*": lambda body: body.text("*poke*"),
+    "omae wa mou shindeiru": lambda body: body.text("NANI!?"),
+    "booli": lambda body: body.text(":luigina:"),
+    USERID+" who you love": lambda body: body.text("I only love "+ZALTU),
+    USERID+" do you love me": lambda body: body.text("I only love "+ZALTU),
+    USERID+" who you not love": lambda body: body.text("You."),
+    USERID+" who you don't love": lambda body: body.text("You."),
+    USERID+" who you dont love": lambda body: body.text("You."),
+    USERID+" ur mom gay lol": lambda body: body.text("no u"),
+    USERID+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
+    ".persona": lambda body: body.interface(body.nyx),
+    ".owo": lambda body: body.interface(body.owo),
+    ".games": lambda body: body.interface(body.games)
 }

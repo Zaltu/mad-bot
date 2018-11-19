@@ -2,14 +2,14 @@
 VERY mad bot responding at incredibly hihg speeds
 """
 from consts import USERID, COMMAND_KEYWORDS
-
+from actions import Body
 
 class Reactor(object):
     """
     Handles bot reactions to server activity
     """
     def __init__(self):
-        self.message = ""
+        self.body = Body()
 
     def process(self, text):
         """
@@ -20,7 +20,9 @@ class Reactor(object):
         :returns: message to post, if applicable
         :rtype: str|None
         """
-        self.message = text
+        # Set Body context
+        self.body.vars['text'] = text
+
         words = set(text.split(" "))
         most = 0
         command = None
@@ -28,15 +30,13 @@ class Reactor(object):
             intNum = len(set(key.split(" ")).intersection(words))
             if len(key.split(" ")) == intNum and  most < intNum or (most == intNum and \
                     len(set(key.split(" "))) < len(set(command.split(" "))) if command else 0):
-                print (key, intNum)
-                print len(key.split(" "))
                 most = intNum
                 command = key
 
         if command:
-            return COMMAND_KEYWORDS[command]()
+            return COMMAND_KEYWORDS[command](self.body)
 
 
 if __name__ == "__main__":
     R = Reactor()
-    print R.process(".persona")
+    print(R.process(".games zaltu ps4"))
