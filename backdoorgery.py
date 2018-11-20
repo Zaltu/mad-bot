@@ -1,31 +1,81 @@
+"""
+Illegal API to access backloggery stats
+"""
 import requests
 from pyquery import PyQuery
 
 STATIC_URL = "https://backloggery.com"
+USER_URL = "https://backloggery.com/{user}"
+USER_CONSOLE_URL = "https://backloggery.com/games.php?user={user}&console={console}"
 GAMES_TAG = "table#sysgrid"
+CONSOLE_STATS_TAG = "div#maincolumn"
 
 def _getHTML(url):
+    """
+    Makes the CURL request to the URL
+
+    :param str url: the target URL
+
+    :returns: the HTML returned from request get call
+    :rtype: str
+    """
     return requests.get(url).text
 
 
-def _buildUrl(user):
+def _buildUrl(user=None, console=None):
+    """
+    Build the correct URL required to access certain stats.
+
+    :param str user: optional user to get information from
+    :param str console: optional console to get information from
+
+    :returns: a backloggery.com URL containing the desired information
+    :rtype: str
+    """
+    if user and console:
+        return USER_CONSOLE_URL.format(user=user, console=console)
     if user:
-        return STATIC_URL + "/" + user
+        return USER_URL.format(user=user)
+    return STATIC_URL
 
 
-def getTag(html):
+def getTag(html, tag):
+    """
+    Performs a very simple parse on HTML and returns a list of values matching the HTML tag given.
+    See pyquery docs for more information.
+
+    :param str html: the html to parse
+    :param str tag: the html tag to search for
+
+    :returns: values matching the tag
+    :rtype: list
+    """
     pq = PyQuery(html)
-    tag = pq(GAMES_TAG)
+    tag = pq(tag)
     return tag.text().split("\n")
 
 
 def getConsoleMetrics(user, console):
-    html = _getHTML(_buildUrl(user))
-    data = getTag(html)
-    if not data:
-        return "Invalid user \"%s\"" % user
+    """
+    Get the Unfinished/Beated/Complete metrics for a certain user on a certain console.
 
-    # This is probably very stupid. Check literally any alternate URL
-    sumStr = "{user} has the following stats for their {console}:"
-    sumStr += "\n{unfinished} games unfinished\n{beaten} games beaten\n{complete} games completed"
-    "https://backlogger.com/games.php?user={user}&console={console}"
+    :param str user: the user to analyze
+    :param str console: the console to analyze
+
+    :returns: formatted visual of game status metrics for the user
+    :rtype: str
+    """
+    html = _getHTML(_buildUrl(user, console))
+    data = getTag(html, CONSOLE_STATS_TAG)
+    try:
+        sumStr = ("{user} has the following stats for their {console}:"
+                  "\n{unfinished} games unfinished\n{beaten} games beaten\n{complete} games completed")
+        return sumStr.format(user=user, console=console, unfinished=data[1], beaten=data[8], complete=data[11])
+    except IndexError:
+        return "Invalid user \"%s\" or console \"%s\"" % (user, console)
+
+
+
+
+if __name__ == "__main__":
+    print(getConsoleMetrics("Zaltu", "PS4"))

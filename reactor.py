@@ -39,4 +39,4 @@ class Reactor(object):
 
 if __name__ == "__main__":
     R = Reactor()
-    print(R.process(".games zaltu ps4"))
+    print(R.process("hewwo?"))

@@ -2,10 +2,13 @@
 Functions for all possible actions
 """
 import random
+import backdoorgery
 
 
 class Body(object):
-
+    """
+    Possible 'actions' the bot may take.
+    """
     def __init__(self):
         self.vars = {}
 
@@ -52,5 +55,13 @@ class Body(object):
         return "OwO"
 
     def games(self):
+        """
+        Show some stats based off of a user and a console
+
+        :returns: the command terms if improperly called or a user's console metrics
+        :rtype: str
+        """
         terms = self.vars['text'].split(" ")[1:]
-        return terms
+        if len(terms) < 2:
+            return ".games takes a {user} and a {console}"
+        return backdoorgery.getConsoleMetrics(terms[0], terms[1])
