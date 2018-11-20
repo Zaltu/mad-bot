@@ -70,12 +70,15 @@ def getConsoleMetrics(user, console):
     try:
         sumStr = ("{user} has the following stats for their {console}:"
                   "\n{unfinished} games unfinished\n{beaten} games beaten\n{complete} games completed")
-        return sumStr.format(user=user, console=console, unfinished=data[1], beaten=data[8], complete=data[11])
+        if len(data) > 9:
+            return sumStr.format(user=user, console=console, unfinished=data[1], beaten=data[8], complete=data[11])
+        else:
+            return sumStr.format(user=user, console=console, unfinished=data[1], beaten=data[4], complete=data[7])
     except IndexError:
-        return "Invalid user \"%s\" or console \"%s\"" % (user, console)
+        return "Invalid user \"%s\" or console \"%s\"\n\n%s\n\n%s" % (user, console, html, data)
 
 
 
 
 if __name__ == "__main__":
-    print(getConsoleMetrics("Zaltu", "PS4"))
+    print(getConsoleMetrics("zaltu", "pc"))
