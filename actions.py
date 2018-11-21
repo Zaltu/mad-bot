@@ -5,11 +5,12 @@ import random
 import backdoorgery
 
 
-class Body(object):
+class DiscordBody(object):
     """
     Possible 'actions' the bot may take.
     """
-    def __init__(self):
+    def __init__(self, mind):
+        self.mind = mind
         self.vars = {}
 
     def interface(self, command):
@@ -30,7 +31,9 @@ class Body(object):
         :returns: the text param
         :rtype: str
         """
-        return text
+        return text.format(author=self.vars['author'],
+                           channel=self.vars['channel'],
+                           input=self.vars['input'])
 
     def nyx(self):
         """

@@ -36,3 +36,8 @@ COMMAND_KEYWORDS = {
     ".owo": lambda body: body.interface(body.owo),
     ".games": lambda body: body.interface(body.games)
 }
+
+
+CONTEXT_MAP = {
+    "Discord": lambda mind, delta: mind._processDiscord(delta)
+}

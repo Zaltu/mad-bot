@@ -1,27 +1,54 @@
 """
 VERY mad bot responding at incredibly hihg speeds
 """
-from consts import USERID, COMMAND_KEYWORDS
-from actions import Body
+from consts import COMMAND_KEYWORDS, CONTEXT_MAP
+from actions import DiscordBody
 
-class Reactor(object):
+class Mind(object):
     """
     Handles bot reactions to server activity
-    """
-    def __init__(self):
-        self.body = Body()
 
-    def process(self, text):
+    :param obj bot: the bot that handles the body and mind
+    """
+    def __init__(self, bot):
+        self.parent = bot
+
+    def process(self, context, delta):
         """
         Filter for the incoming text message to parse it along Aigis' lines.
 
-        :param str text: input text
+        :param str context: input context
+        :param str delta: explicit input
 
         :returns: message to post, if applicable
         :rtype: str|None
         """
+        #try:
+        return CONTEXT_MAP[context](self, delta)
+        #except KeyError:
+        #    return "I don't know what a {context} is... :(".format(context=context)
+
+    def _processDiscord(self, delta):
+        """
+        Discord context processor
+        Currently only processes text inputs
+
+        :param obj delta: a discord input object
+
+        :returns: If delta was reacted to properly.
+        :rtype: bool
+        """
+
+        body = DiscordBody(self)
+
         # Set Body context
-        self.body.vars['text'] = text
+        text = delta#.content
+        body.vars = {
+            'text': delta,#.content,
+            'channel': delta,#.channel,
+            'author': "Zaltu",#<@!"+delta.author.id+">",
+            'input': "N/A"
+        }
 
         words = set(text.split(" "))
         most = 0
@@ -34,9 +61,4 @@ class Reactor(object):
                 command = key
 
         if command:
-            return COMMAND_KEYWORDS[command](self.body)
-
-
-if __name__ == "__main__":
-    R = Reactor()
-    print(R.process("hewwo?"))
+            return COMMAND_KEYWORDS[command](body)

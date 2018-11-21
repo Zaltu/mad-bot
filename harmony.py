@@ -6,17 +6,18 @@ import discord
 import consts
 from reactor import Reactor
 
+DISCORD_CONTEXT = "Discord"
 
-class Harmony(discord.Client):
+class DiscordSenses(discord.Client):
     """
     Discord API wrapper
     """
-    def __init__(self, token):
+    def __init__(self, bot, token):
         self.token = token
         self.sigkill = False  # Warning! Dangerous!
         self.connectionThread = Thread(name="Start Thread", target=self._startConnection)
         self.endConnectionThread = Thread(name="End Thread", target=self._endConnection)
-        self.reactor = Reactor()
+        self.bot = bot
         super().__init__()
 
     def activate(self):
@@ -47,9 +48,6 @@ class Harmony(discord.Client):
             pass
         self.loop.run_until_complete(self.logout())
 
-    def _sanitizeMessage(self, message):
-        return message.lower()
-
     async def on_message(self, message):
         ### Temporary
         print("\nAuthor")
@@ -61,16 +59,9 @@ class Harmony(discord.Client):
         print("\nContent")
         pp(message.content)
         ###
-        cleaned = self._sanitizeMessage(message.content)
-        answer = self.reactor.process(cleaned)
+        answer = self.bot.sense(DISCORD_CONTEXT, message)
         if answer and 'SIGKILL' in answer:
             print("SIGKILL sent")
             self.sigkill = True
         elif answer:
-            answer = answer.format(author="<@!"+message.author.id+">")
             await self.send_message(message.channel, answer)
-
-
-if __name__ == "__main__":
-    H = Harmony('')
-    H.activate()
