@@ -42,15 +42,14 @@ class Mind(object):
         body = DiscordBody(self)
 
         # Set Body context
-        text = delta#.content
         body.vars = {
-            'text': delta,#.content,
-            'channel': delta,#.channel,
-            'author': "Zaltu",#<@!"+delta.author.id+">",
+            'text': delta.content,
+            'channel': delta.channel,
+            'author': "<@!"+delta.author.id+">",
             'input': "N/A"
         }
 
-        words = set(text.split(" "))
+        words = set(delta.content.split(" "))
         most = 0
         command = None
         for key in COMMAND_KEYWORDS:

@@ -11,7 +11,9 @@ class Aigis(object):
     def __init__(self):
         self.name = "Aigis"
         self.delta = "Aware"
-        self.discordSenses = DiscordSenses(self, 'token')
+        self.discordSenses = DiscordSenses(self, '')
+        self.discordSenses.activate()
+        print("starting mind")
         self.mind = Mind(self)
 
     def sense(self, context, delta):
@@ -25,4 +27,4 @@ class Aigis(object):
 
 if __name__ == "__main__":
     A = Aigis()
-    print A.sense('Discord', '.games zaltu ps4')
+    #print A.sense('Discord', '.games zaltu ps4')

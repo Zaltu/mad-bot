@@ -25,16 +25,16 @@ COMMAND_KEYWORDS = {
     "*poke*": lambda body: body.text("*poke*"),
     "omae wa mou shindeiru": lambda body: body.text("NANI!?"),
     "booli": lambda body: body.text(":luigina:"),
-    USERID+" who you love": lambda body: body.text("I only love "+ZALTU),
-    USERID+" do you love me": lambda body: body.text("I only love "+ZALTU),
-    USERID+" who you not love": lambda body: body.text("You."),
-    USERID+" who you don't love": lambda body: body.text("You."),
-    USERID+" who you dont love": lambda body: body.text("You."),
+	"doomfist": lambda body: body.text("AND DEY SAY\nAND DEY SAY\nAND DEY SAY\nAND DEY SAY CHIVALRY IS DED"),
+	USERID+" is true meaning life": lambda body: body.text("42 of course"),
+    USERID+" love": lambda body: body.text("I only love "+ZALTU),
     USERID+" ur mom gay lol": lambda body: body.text("no u"),
     USERID+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
     ".persona": lambda body: body.interface(body.nyx),
     ".owo": lambda body: body.interface(body.owo),
-    ".games": lambda body: body.interface(body.games)
+    ".games": lambda body: body.interface(body.games),
+    ".quote": lambda body: body.interface(body.quote),
+    ".quote": lambda body: body.interface(body.quote)
 }
 
 
