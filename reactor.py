@@ -49,7 +49,7 @@ class Mind(object):
             'input': "N/A"
         }
 
-        words = set(delta.content.split(" "))
+        words = set(delta.content.lower().split(" "))
         most = 0
         command = None
         for key in COMMAND_KEYWORDS:

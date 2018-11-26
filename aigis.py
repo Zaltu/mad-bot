@@ -13,7 +13,6 @@ class Aigis(object):
         self.delta = "Aware"
         self.discordSenses = DiscordSenses(self, '')
         self.discordSenses.activate()
-        print("starting mind")
         self.mind = Mind(self)
 
     def sense(self, context, delta):
