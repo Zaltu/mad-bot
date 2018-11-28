@@ -14,6 +14,16 @@ THROWVERWATCH = "486360257296334880"
 GENERAL = "337753641299738624"
 
 
+LOWOGI = "<:lowogi:510216907987746819>"
+LUIGGENIUS = "<:luiggenius:410224811281874944>"
+LUIGICHAMP = "<:luigichamp:422449772805357569>"
+LUIGITHINKING = "<:luigithinking:435933846546939916>"
+LUIGINA = "<:luigina:423933740650332181>"
+NOTLIKETHIS = "<:notlikethis:409136479659491328>"
+SHIELDGEN = "<:shieldgen:409135849570304000>"
+PANDINATOR = "<:pandinator:446134393623281665>"
+
+
 COMMAND_KEYWORDS = {
     "hewwo?": lambda body: body.text("*notices {author}* OwO who's this?"),
     "lol": lambda body: body.text("lmaonade"),
@@ -21,7 +31,7 @@ COMMAND_KEYWORDS = {
     "dcpls": lambda body: body.text("SIGKILL"),
     "*poke*": lambda body: body.text("*poke*"),
     "omae wa mou shindeiru": lambda body: body.text("NANI!?"),
-    "booli": lambda body: body.text(":luigina:"),
+    "booli": lambda body: body.text(LUIGINA),
     "doomfist": lambda body: body.text("AND DEY SAY\nAND DEY SAY\nAND DEY SAY\nAND DEY SAY CHIVALRY IS DED"),
     "headshot": lambda body: body.text("MY HEART'S BEATING, HEART'S BEATING HANDS ARE SHAKING\nBUT I STILL SHOOTIN'\nAND I STILL GETTIN' HEADSHOTS LIKE\nBOOM HEADSHOT\nBOOM HEASHOT"),
     USERID+" is true meaning life": lambda body: body.text("42 of course"),
