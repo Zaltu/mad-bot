@@ -26,6 +26,7 @@ PANDINATOR = "<:pandinator:446134393623281665>"
 
 COMMAND_KEYWORDS = {
     "hewwo?": lambda body: body.text("*notices {author}* OwO who's this?"),
+    "gay tripping": lambda body: body.text("Is gay."),
     "lol": lambda body: body.text("lmaonade"),
     "brigitte": lambda body: body.text("bRrRrAgUeTtE XD XD"),
     "dcpls": lambda body: body.text("SIGKILL"),
@@ -38,14 +39,47 @@ COMMAND_KEYWORDS = {
     USERID+" love": lambda body: body.text("I only love "+ZALTU),
     USERID+" ur mom gay lol": lambda body: body.text("no u"),
     USERID+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
-    ".persona": lambda body: body.interface(body.nyx),
-    ".owo": lambda body: body.interface(body.owo),
-    ".games": lambda body: body.interface(body.games),
-    ".quote": lambda body: body.interface(body.quote),
-    ".addquote": lambda body: body.interface(body.addquote)
+    USERID+" sing song": lambda body: body.text(AIGIS_SONG),
+    ".persona": lambda body: body.nyx,
+    ".owo": lambda body: body.owo,
+    ".games": lambda body: body.games,
+    ".quote": lambda body: body.quote,
+    ".addquote": lambda body: body.addquote
 }
 
 
 CONTEXT_MAP = {
     "Discord": lambda mind, delta: mind._processDiscord(delta)
 }
+
+
+
+
+
+
+AIGIS_SONG = """
+SOMEBODY ONCE TOLD ME\n
+THAT WAIFUS WERE BAD FOR ME
+I AIN'T THE SHARPEST TOOL IN THE SHED
+
+SHE WAS LOOKING KIND OF DUMB
+FYI, SHE IS MY MOM
+AS I PINNED MY WAIFU DOWN ON MY BED
+
+WELL
+
+THE LOVE STARTS COMING AND IT DON'T STOP COMING
+GET A BODY PILLOW AND YOU HIT THE BED POMF-ING
+DIDN'T MAKE SENSE NOT TO LOVE 2D
+>IT'S STILL WAY BETTER THAN 3DPD
+
+THERE'S SO MUCH ART
+FOR ME TO SEE
+SO WHAT'S WRONG WITH ME SPENDING MY MONEY
+
+NO ONE WANTS TO BE FRIENDS WITH ME
+WE LIVE IN A SOCIETY
+
+HEY NOW
+
+"""

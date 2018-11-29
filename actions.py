@@ -20,18 +20,8 @@ class DiscordBody(object):
     """
     Possible 'actions' the bot may take.
     """
-    def __init__(self, mind):
-        self.mind = mind
+    def __init__(self):
         self.vars = {}
-
-    def interface(self, command):
-        """
-        Call the given command
-
-        :returns: the result of the command
-        :rtype: obj
-        """
-        return command()
 
     def text(self, text):
         """
@@ -60,7 +50,7 @@ class DiscordBody(object):
         NYI
         See Sagiri's owo command implementation
 
-        :returns: "OwO"
+        :returns: lowogi
         :rtype: str
         """
         return "<:lowogi:510216907987746819>"
@@ -121,17 +111,3 @@ class DiscordBody(object):
             quote_file.write(json.dumps(quotes))
 
         return "I'll remember that."
-
-
-if __name__ == "__main__":
-    B = DiscordBody('test')
-    B.vars = {"text": ".quote"}
-    print(B.quote())
-    B.vars = {"text": ".quote @Zaltu"}
-    print(B.quote())
-    B.vars = {"text": ".addquote"}
-    print(B.addquote())
-    B.vars = {"text": ".addquote @Zaltu all games are bad"}
-    print(B.addquote())
-    B.vars = {"text": ".quote @Zaltu"}
-    print(B.quote())
