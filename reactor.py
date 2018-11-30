@@ -1,7 +1,7 @@
 """
 VERY mad bot responding at incredibly hihg speeds
 """
-from consts import COMMAND_KEYWORDS, CONTEXT_MAP
+from consts import COMMAND_KEYWORDS, CONTEXT_MAP, AIGISID
 from actions import DiscordBody
 
 class Mind(object):
@@ -12,6 +12,7 @@ class Mind(object):
     """
     def __init__(self, bot):
         self.parent = bot
+        self.body = DiscordBody()
 
     def process(self, context, delta):
         """
@@ -39,10 +40,12 @@ class Mind(object):
         :rtype: bool
         """
 
-        body = DiscordBody(self)
+        if delta.author.id == AIGISID:
+            # Ignore self-driven actions
+            return
 
         # Set Body context
-        body.vars = {
+        self.body.vars = {
             'text': delta.content,
             'channel': delta.channel,
             'author': "<@!"+delta.author.id+">",
@@ -60,4 +63,4 @@ class Mind(object):
                 command = key
 
         if command:
-            return COMMAND_KEYWORDS[command](body)
+            return COMMAND_KEYWORDS[command](self.body)

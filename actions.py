@@ -5,6 +5,8 @@ import random
 import json
 import backdoorgery
 
+from consts import ADMINID
+
 JSON_PATH = "db/"
 QUOTES_FILE = "quotes.json"
 
@@ -54,6 +56,16 @@ class DiscordBody(object):
         :rtype: str
         """
         return "<:lowogi:510216907987746819>"
+
+    def sigkill(self):
+        """
+        Send a DC signal to DiscordSenses
+
+        :returns: a dc signal
+        :rtype: str
+        """
+        if self.vars.author.id in ADMINID:
+            return "SIGKILL"
 
     def games(self):
         """
