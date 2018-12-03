@@ -104,6 +104,7 @@ COMMAND_KEYWORDS = {
     "doomfist": lambda body: body.text(DOOMFIST),
     "headshot": lambda body: body.text(HEADSHOT),
     "monhun": lambda body: body.text("{author} Shit game"),
+    "hunmon": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
     "i did a thing": lambda body: body.text("Thank you Kanye, very cool"),
     "we live in a society": lambda body: body.text("Gamers rise up"),
     "shotgun": lambda body: body.text(HIGH_IQ_SHOTGUN),
