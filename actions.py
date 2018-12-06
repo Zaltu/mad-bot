@@ -50,6 +50,7 @@ class DiscordBody(object):
         """
         if self.vars["input"].author.id in ADMINID:
             return "SIGKILL"
+        return "You can't tell me what to do."
 
     def games(self):
         """

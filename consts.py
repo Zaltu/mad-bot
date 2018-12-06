@@ -75,6 +75,20 @@ IT'S A LEWD PLACE
 AND THEY SAY IT GETS LEWDER
 YEAH VANILLA'S COOL
 BUT HAVE YOU TRIED FUTA?
+
+RAVIOLI
+RAVIOLI
+DON'T EVEN THINK ABOUT TOUCHING THAT LOLI
+
+OH MY GOD
+WHAT HAVE YOU DONE
+THE FBI'S COMING SO YOU MIGHT AS WELL RUN
+
+THAT'S WHY I STAY
+AWAY FROM UNDERAGE
+MY WAIFU'S LEGAL AND I LOVE HER ALL DAY
+
+HEY NOW
 """
 DOOMFIST = """
 AND DEY SAY
@@ -143,7 +157,9 @@ COMMANDMENTS = [
     PAUL+" is Trump, confirmed.",
     "gg ez",
     "Having more than one Waifu will destroy your laifu.",
-    "It's almost scary how good I am."
+    "It's almost scary how good I am.",
+    "OwO what's this?",
+    "REEEEEEEEEEEEEEEEEEEEEEEEEEEE",
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
@@ -178,6 +194,7 @@ COMMAND_KEYWORDS = {
     "i chooseth this fate of mine own free will": lambda body: body.text(VELVET_ROOM),
     "he did it!": lambda body: body.text("The absolute madlad! " + LUIGICHAMP),
     "memes": lambda body: body.text("And Dreams"),
+    "black": lambda body: body.texy("What, are you racist?"),
     AIGIS+" is true meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" ur mom gay lol": lambda body: body.text("no u"),
