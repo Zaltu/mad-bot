@@ -49,7 +49,7 @@ class Mind(object):
             'text': delta.content,
             'channel': delta.channel,
             'author': "<@!"+delta.author.id+">",
-            'input': "N/A"
+            'input': delta
         }
 
         words = set(delta.content.lower().split(" "))

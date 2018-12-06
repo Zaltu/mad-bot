@@ -11,13 +11,6 @@ JSON_PATH = "db/"
 QUOTES_FILE = "quotes.json"
 
 
-PERSONA_QUOTES = {
-    "Celebrate life's grandeur. Its brilliance. Its magnificence.",
-    "There is both joy and wonder in coming to understand another.",
-    "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits."
-}
-
-
 class DiscordBody(object):
     """
     Possible 'actions' the bot may take.
@@ -38,15 +31,6 @@ class DiscordBody(object):
                            channel=self.vars['channel'],
                            input=self.vars['input'])
 
-    def nyx(self):
-        """
-        Generate a random Nyx quote
-
-        :returns: one of Nyx's final battle quotes.
-        :rtype: str
-        """
-        return random.sample(PERSONA_QUOTES, 1)[0]
-
     def owo(self):
         """
         NYI
@@ -64,7 +48,7 @@ class DiscordBody(object):
         :returns: a dc signal
         :rtype: str
         """
-        if self.vars.author.id in ADMINID:
+        if self.vars["input"].author.id in ADMINID:
             return "SIGKILL"
 
     def games(self):

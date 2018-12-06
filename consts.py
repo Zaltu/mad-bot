@@ -1,6 +1,8 @@
 """
 MAD bot consts
 """
+import random
+
 AIGISID = "256154948734156801"
 AIGIS = "<@256154948734156801>"
 
@@ -60,6 +62,17 @@ HEY NOW
 I'M A WEEABOO
 I LOVE ANIME
 HENTAI TOO
+
+AND ALL MY WAIFUS LOVE ME
+NOT A SINGLE ONE IS
+OVER THIRTEEN
+
+AND ALL MY WAIFUS LOVE MEEEEEEE
+I SWEAR, 3D IS A MEME
+
+
+IT'S A LEWD PLACE
+AND THEY SAY IT GETS LEWDER
 """
 DOOMFIST = """
 AND DEY SAY
@@ -91,7 +104,33 @@ HIGH_IQ_SHOTGUN = ("To be fair, you have to have a very high IQ to understand Sh
                    "by the way, i DO have a Shotgun tattoo. And no, you cannot see it. It's for the "
                    "ladies' eyes only- and even then they have to demonstrate that they're within 5 "
                    "IQ points of my own (preferably lower) beforehand. Nothin personnel kid :sunglasses:")
+VELVET_ROOM = """
+Welcome to the Velvet Room.
 
+My name is Igor.
+I am delighted to make your acquaintance.
+This place exists between dream and reality.
+Mind and matter.
+Only those who have forged some sort of contract may enter.
+"""
+ANIME = [
+    "Death Note",
+    "Hidan no Aria, but unironically",
+    "Stop watching anime, faggot",
+    "Fruits Basket",
+    "The Persona  movies ;) . Play the game first though.",
+    "Boku no Pico",
+    "Cory in the House",
+    "Hataraku Saibou",
+    "Black Lagoon",
+    "Jormungand",
+    "Durarara, mainly because the OP1 is amazing",
+]
+PERSONA_QUOTES = [
+    "Celebrate life's grandeur. Its brilliance. Its magnificence.",
+    "There is both joy and wonder in coming to understand another.",
+    "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits."
+]
 
 COMMAND_KEYWORDS = {
     "hewwo?": lambda body: body.text("*notices {author}* OwO who's this?"),
@@ -105,26 +144,36 @@ COMMAND_KEYWORDS = {
     "headshot": lambda body: body.text(HEADSHOT),
     "monhun": lambda body: body.text("{author} Shit game"),
     "hunmon": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
+    "mon hun": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
+    "mons hun": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
     "i did a thing": lambda body: body.text("Thank you Kanye, very cool"),
     "we live in a society": lambda body: body.text("Gamers rise up"),
+    "gamers rise up": lambda body: body.text("We live in a society"),
     "shotgun": lambda body: body.text(HIGH_IQ_SHOTGUN),
-    "guess i'll be tracer": lambda body: body.text("I'm already Tracer."),
+    "i'll be tracer": lambda body: body.text("I'm already Tracer."),
     "real woman": lambda body: body.text("Hello yes I am real woman you want go skateboards?"),
     "stupid cat": lambda body: body.text("Damn rat."),
     "damn rat": lambda body: body.text("Stupid cat."),
+    "ken": lambda body: body.text("Ken is a team-killing shit."),
     "feelsbadman": lambda body: body.text(LUIGIHANDS),
     "feels bad man": lambda body: body.text(LUIGIHANDS),
+    "skyrim": lambda body: body.text("SKYRIM BELONGS TO THE NORDS!"),
+    "based revolver jesus": lambda body: body.text("B A S E D\nA\nS\nE\nD"),
+    "i chooseth this fate of mine own free will": lambda body: body.text(VELVET_ROOM),
+    "he did it!": lambda body: body.text("The absolute madlad! " + LUIGICHAMP),
+    "memes": lambda body: body.text("And Dreams"),
     AIGIS+" is true meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" ur mom gay lol": lambda body: body.text("no u"),
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
     AIGIS+" sing song": lambda body: body.text(AIGIS_SONG),
-    "dcpls": lambda body: body.sigkill,
-    ".persona": lambda body: body.nyx,
-    ".owo": lambda body: body.owo,
-    ".games": lambda body: body.games,
-    ".quote": lambda body: body.quote,
-    ".addquote": lambda body: body.addquote
+    AIGIS+" anime?": lambda body: body.text(random.sample(ANIME, 1)[0]),
+    "dcpls": lambda body: body.sigkill(),
+    ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
+    ".owo": lambda body: body.owo(),
+    ".games": lambda body: body.games(),
+    ".quote": lambda body: body.quote(),
+    ".addquote": lambda body: body.addquote()
 }
 
 
