@@ -160,6 +160,7 @@ COMMANDMENTS = [
     "It's almost scary how good I am.",
     "OwO what's this?",
     "REEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+    "I'VE GOT THE FEELING THAT THEY'VE GOT A SHIEEEEEEEEEELD GENERATOR!"
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
