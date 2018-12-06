@@ -73,6 +73,8 @@ I SWEAR, 3D IS A MEME
 
 IT'S A LEWD PLACE
 AND THEY SAY IT GETS LEWDER
+YEAH VANILLA'S COOL
+BUT HAVE YOU TRIED FUTA?
 """
 DOOMFIST = """
 AND DEY SAY
@@ -131,6 +133,20 @@ PERSONA_QUOTES = [
     "There is both joy and wonder in coming to understand another.",
     "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits."
 ]
+COMMANDMENTS = [
+    "Traps are gay.",
+    "Luigi is the real hero.",
+    "It was probably Maybelline.",
+    "We are throwing.",
+    "We live in a society.",
+    "No items, Ganondorf only, Final Destination.",
+    PAUL+" is Trump, confirmed.",
+    "gg ez",
+    "Having more than one Waifu will destroy your laifu.",
+    "It's almost scary how good I am."
+]
+COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
+
 
 COMMAND_KEYWORDS = {
     "hewwo?": lambda body: body.text("*notices {author}* OwO who's this?"),
@@ -168,12 +184,13 @@ COMMAND_KEYWORDS = {
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
     AIGIS+" sing song": lambda body: body.text(AIGIS_SONG),
     AIGIS+" anime?": lambda body: body.text(random.sample(ANIME, 1)[0]),
-    "dcpls": lambda body: body.sigkill(),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
+    ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(random.sample(COMMANDMENTS, 1)[0])),
     ".owo": lambda body: body.owo(),
     ".games": lambda body: body.games(),
     ".quote": lambda body: body.quote(),
-    ".addquote": lambda body: body.addquote()
+    ".addquote": lambda body: body.addquote(),
+    "dcpls": lambda body: body.sigkill(),
 }
 
 
