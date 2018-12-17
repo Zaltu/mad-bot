@@ -39,7 +39,7 @@ def _buildUrl(user=None, console=None):
     return STATIC_URL
 
 
-def getTag(html, tag):
+def _getTag(html, tag):
     """
     Performs a very simple parse on HTML and returns a list of values matching the HTML tag given.
     See pyquery docs for more information.
@@ -57,7 +57,7 @@ def getTag(html, tag):
 
 def getConsoleMetrics(user, console):
     """
-    Get the Unfinished/Beated/Complete metrics for a certain user on a certain console.
+    Get the Unfinished/Beaten/Completed metrics for a certain user on a certain console.
 
     :param str user: the user to analyze
     :param str console: the console to analyze
@@ -66,10 +66,10 @@ def getConsoleMetrics(user, console):
     :rtype: str
     """
     html = _getHTML(_buildUrl(user, console))
-    data = getTag(html, CONSOLE_STATS_TAG)
+    data = _getTag(html, CONSOLE_STATS_TAG)
     try:
-        sumStr = ("{user} has the following stats for their {console}:"
-                  "\n{unfinished} games unfinished\n{beaten} games beaten\n{complete} games completed")
+        sumStr = ("{user} has the following stats for their {console}:\n"
+                  "{unfinished} games unfinished\n{beaten} games beaten\n{complete} games completed")
         if len(data) > 9:
             return sumStr.format(user=user, console=console, unfinished=data[1], beaten=data[8], complete=data[11])
         else:
