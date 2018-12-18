@@ -203,7 +203,7 @@ COMMAND_KEYWORDS = {
     AIGIS+" sing song": lambda body: body.text(AIGIS_SONG),
     AIGIS+" anime?": lambda body: body.text(random.sample(ANIME, 1)[0]),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
-    ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(random.sample(COMMANDMENTS, 1)[0])),
+    ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
     ".owo": lambda body: body.owo(),
     ".games": lambda body: body.games(),
     ".cookie": lambda body: body.gamecookie(),
