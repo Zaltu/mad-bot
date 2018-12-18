@@ -206,6 +206,7 @@ COMMAND_KEYWORDS = {
     ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(random.sample(COMMANDMENTS, 1)[0])),
     ".owo": lambda body: body.owo(),
     ".games": lambda body: body.games(),
+    ".cookie": lambda body: body.gamecookie(),
     ".quote": lambda body: body.quote(),
     ".addquote": lambda body: body.addquote(),
     "dcpls": lambda body: body.sigkill(),

@@ -64,6 +64,18 @@ class DiscordBody(object):
             return ".games takes a {user} and a {console}"
         return backdoorgery.getConsoleMetrics(terms[0], terms[1])
 
+    def gamecookie(self):
+        """
+        Show a random game from a user's backloggery
+
+        :returns: a random game or the command syntax
+        :rtype: str
+        """
+        terms = self.vars['text'].split(" ")[1:]
+        if not len(terms):
+            return ".cookie takes a {user}"
+        return backdoorgery.getFortuneCookie(terms[0])
+
     def quote(self):
         """
         Fetch a user's quote
@@ -108,3 +120,8 @@ class DiscordBody(object):
             quote_file.write(json.dumps(quotes))
 
         return "I'll remember that."
+
+if __name__ == "__main__":
+    B = DiscordBody()
+    B.vars = {"text": ".cookie zaltu"}
+    print(B.gamecookie())
