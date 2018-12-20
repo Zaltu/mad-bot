@@ -53,9 +53,8 @@ class Mind(object):
             'author': "<@!"+delta.author.id+">",
             'input': delta
         }
-
-        words = set(delta.content.lower().split(" "))
-		words = re.sub('[!@#$,:;?]', '', fullTerms)
+        words = re.sub('[!@#$,:;?]', '', delta.content.lower())
+        words = set(words.split(" "))
         most = 0
         command = None
         for key in COMMAND_KEYWORDS:
