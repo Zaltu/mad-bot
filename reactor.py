@@ -1,6 +1,8 @@
 """
 VERY mad bot responding at incredibly hihg speeds
 """
+import re
+
 from consts import COMMAND_KEYWORDS, CONTEXT_MAP, AIGISID
 from actions import DiscordBody
 
@@ -53,6 +55,7 @@ class Mind(object):
         }
 
         words = set(delta.content.lower().split(" "))
+		words = re.sub('[!@#$,:;?]', '', fullTerms)
         most = 0
         command = None
         for key in COMMAND_KEYWORDS:
