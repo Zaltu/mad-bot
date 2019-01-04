@@ -166,7 +166,7 @@ COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
 
 COMMAND_KEYWORDS = {
-    "hewwo?": lambda body: body.text("*notices {author}* OwO who's this?"),
+    "hewwo": lambda body: body.text("*notices {author}* OwO who's this?"),
     "gay tripping": lambda body: body.text("Is gay."),
     "lol": lambda body: body.text("lmaonade"),
     "brigitte": lambda body: body.text("bRrRrAgUeTtE XD XD"),
@@ -201,7 +201,7 @@ COMMAND_KEYWORDS = {
     AIGIS+" ur mom gay lol": lambda body: body.text("no u"),
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
     AIGIS+" sing song": lambda body: body.text(AIGIS_SONG),
-    AIGIS+" anime?": lambda body: body.text(random.sample(ANIME, 1)[0]),
+    AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
     ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
     ".owo": lambda body: body.owo(),
