@@ -193,7 +193,7 @@ COMMAND_KEYWORDS = {
     "skyrim": lambda body: body.text("SKYRIM BELONGS TO THE NORDS!"),
     "based revolver jesus": lambda body: body.text("B A S E D\nA\nS\nE\nD"),
     "i chooseth this fate of mine own free will": lambda body: body.text(VELVET_ROOM),
-    "he did it!": lambda body: body.text("The absolute madlad! " + LUIGICHAMP),
+    "he did it": lambda body: body.text("The absolute madlad! " + LUIGICHAMP),
     "memes": lambda body: body.text("And Dreams"),
     "black": lambda body: body.texy("What, are you racist?"),
     AIGIS+" is true meaning life": lambda body: body.text("42 of course"),
