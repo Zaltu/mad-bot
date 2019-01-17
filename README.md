@@ -1,2 +1,2 @@
 # mad-bot
-Bot for MAD (and OC)
+Incredibly poorly overdesigned Bot for MAD (and OC)
