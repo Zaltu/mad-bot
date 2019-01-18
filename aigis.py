@@ -2,9 +2,11 @@
 Main bot control center
 """
 import json
+import schedule
 
 from reactor import Mind
 from harmony import DiscordSenses
+import habits
 
 class Aigis(object):
     """
@@ -41,6 +43,14 @@ class Aigis(object):
         :rtype: obj
         """
         return self.mind.process(context, delta)
+
+    def routine(self):
+        """
+        Define certain actions to be done routinely, independant of input
+        """
+        for habit in habits.DAILY:
+            schedule.every().day.at("20:30").do(lambda job=habit: job(self.discordSenses))
+        schedule.run_pending()
 
 
 def discordCreds():
