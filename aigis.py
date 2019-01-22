@@ -2,11 +2,11 @@
 Main bot control center
 """
 import json
-import schedule
+import asyncio
 
 from reactor import Mind
 from harmony import DiscordSenses
-import habits
+from habits import Habits
 
 class Aigis(object):
     """
@@ -17,7 +17,9 @@ class Aigis(object):
         self.delta = "Aware"
         self.discordSenses = DiscordSenses(self, discordCreds())
         self.discordSenses.activate()
+        #asyncio.run(test())
         self.mind = Mind(self)
+        self.habits = Habits(self.discordSenses)
 
     def sense(self, context, delta):
         """
@@ -44,14 +46,9 @@ class Aigis(object):
         """
         return self.mind.process(context, delta)
 
-    def routine(self):
-        """
-        Define certain actions to be done routinely, independant of input
-        """
-        for habit in habits.DAILY:
-            schedule.every().day.at("20:30").do(lambda job=habit: job(self.discordSenses))
-        schedule.run_pending()
 
+#async def test():
+#    await self.discordSenses.send_message(destination=self.discordSenses.get_channel("337753641299738624"), content="testing")
 
 def discordCreds():
     """

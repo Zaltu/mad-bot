@@ -24,6 +24,7 @@ class DiscordSenses(discord.Client):
         Bring bot online
         """
         self.connectionThread.start()
+        self.getChannelObjConsts()
         
     def _startConnection(self):
         """
@@ -34,6 +35,9 @@ class DiscordSenses(discord.Client):
         except RuntimeError as e:
             if "Event loop stopped before Future completed." not in str(e):
                 print(e)
+
+    def getChannelObjConsts(self):
+        self.GENERAL = self.get_channel(337753641299738624)
 
     def _endConnection(self):
         """
