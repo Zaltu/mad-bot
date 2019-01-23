@@ -3,15 +3,16 @@ Functions for all possible actions
 """
 import random
 import json
-import backdoorgery
+import os
 
-from consts import ADMINID
+from src.libs import backdoorgery
 
-JSON_PATH = "db/"
-QUOTES_FILE = "quotes.json"
+from src.consts import ADMINID, DBPATH
+
+QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 
 
-class DiscordBody(object):
+class Actions(object):
     """
     Possible 'actions' the bot may take.
     """
@@ -87,7 +88,7 @@ class DiscordBody(object):
             quotee = self.vars['text'].split(" ")[1]
         except (KeyError, IndexError):
             return "No one to quote"
-        with open(JSON_PATH+QUOTES_FILE, 'r+') as quote_file:
+        with open(QUOTES_FILE, 'r+') as quote_file:
             quotes = json.load(quote_file)
 
         try:
@@ -110,18 +111,13 @@ class DiscordBody(object):
         except (KeyError, IndexError):
             return "Woah there son, you aren't even quoting anything."
         formattedQuote = quote + "\n        - " + quotee
-        with open(JSON_PATH+QUOTES_FILE, 'r+') as quote_file:
+        with open(QUOTES_FILE, 'r+') as quote_file:
             quotes = json.load(quote_file)
         if quotee in quotes:
             quotes[quotee].append(formattedQuote)
         else:
             quotes.setdefault(quotee, [formattedQuote])
-        with open(JSON_PATH+QUOTES_FILE, 'w+') as quote_file:
+        with open(QUOTES_FILE, 'w+') as quote_file:
             quote_file.write(json.dumps(quotes))
 
         return "I'll remember that."
-
-if __name__ == "__main__":
-    B = DiscordBody()
-    B.vars = {"text": ".cookie zaltu"}
-    print(B.gamecookie())

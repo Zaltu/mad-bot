@@ -3,10 +3,11 @@ VERY mad bot responding at incredibly hihg speeds
 """
 import re
 
-from consts import COMMAND_KEYWORDS, CONTEXT_MAP, AIGISID
-from actions import DiscordBody
+from src.actions.commands import COMMAND_KEYWORDS
+from src.actions.actions import Actions
+from src.consts import AIGISID
 
-class Mind(object):
+class Reactor(object):
     """
     Handles bot reactions to server activity
 
@@ -14,34 +15,17 @@ class Mind(object):
     """
     def __init__(self, bot):
         self.parent = bot
-        self.body = DiscordBody()
+        self.body = Actions()
 
-    def process(self, context, delta):
+    def process(self, delta):
         """
         Filter for the incoming text message to parse it along Aigis' lines.
 
-        :param str context: input context
         :param str delta: explicit input
 
         :returns: message to post, if applicable
         :rtype: str|None
         """
-        #try:
-        return CONTEXT_MAP[context](self, delta)
-        #except KeyError:
-        #    return "I don't know what a {context} is... :(".format(context=context)
-
-    def _processDiscord(self, delta):
-        """
-        Discord context processor
-        Currently only processes text inputs
-
-        :param obj delta: a discord input object
-
-        :returns: If delta was reacted to properly.
-        :rtype: bool
-        """
-
         if delta.author.id == AIGISID:
             # Ignore self-driven actions
             return

@@ -1,23 +1,9 @@
 """
-MAD bot consts
+All command keywords. JFF or not.
 """
 import random
 
-AIGISID = "256154948734156801"
-AIGIS = "<@256154948734156801>"
-
-ADMINID = ['204727270261129216']
-
-ZALTU = "<@!204727270261129216>"
-JACK = "<@!141298296676286464>"
-PAUL = "<@!247754637602586625>"
-NASS = "<@!224932238888796160>"
-
-
-HYPERDIMENSIONZALTUNIA = "395611604663664641"
-THROWVERWATCH = "486360257296334880"
-GENERAL = "337753641299738624"
-
+from src.consts import AIGIS, ZALTU, PAUL
 
 LUIGISMUG = "<:luigi2smug:534514921333981206>"
 LOWOGI = "<:lowogi:510216907987746819>"
@@ -165,7 +151,6 @@ COMMANDMENTS = [
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
-
 COMMAND_KEYWORDS = {
     "hewwo": lambda body: body.text("*notices {author}* OwO who's this?"),
     "gay tripping": lambda body: body.text("Is gay."),
@@ -205,15 +190,9 @@ COMMAND_KEYWORDS = {
     AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
     ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
-    ".owo": lambda body: body.owo(),
     ".games": lambda body: body.games(),
     ".cookie": lambda body: body.gamecookie(),
     ".quote": lambda body: body.quote(),
     ".addquote": lambda body: body.addquote(),
     "dcpls": lambda body: body.sigkill(),
-}
-
-
-CONTEXT_MAP = {
-    "Discord": lambda mind, delta: mind._processDiscord(delta)
 }

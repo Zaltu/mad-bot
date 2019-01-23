@@ -3,20 +3,18 @@ from pprint import pprint as pp
 
 import discord
 
-import consts
+import src.consts
 
-DISCORD_CONTEXT = "Discord"
-
-class DiscordSenses(discord.Client):
+class Harmony(discord.Client):
     """
     Discord API wrapper
     """
-    def __init__(self, bot, token):
+    def __init__(self, callback, token):
         self.token = token
         self.sigkill = False  # Warning! Dangerous!
         self.connectionThread = Thread(name="Start Thread", target=self._startConnection)
         self.endConnectionThread = Thread(name="End Thread", target=self._endConnection)
-        self.bot = bot
+        self.callback = callback
         super().__init__()
 
     def activate(self):
@@ -24,7 +22,6 @@ class DiscordSenses(discord.Client):
         Bring bot online
         """
         self.connectionThread.start()
-        self.getChannelObjConsts()
         
     def _startConnection(self):
         """
@@ -35,9 +32,6 @@ class DiscordSenses(discord.Client):
         except RuntimeError as e:
             if "Event loop stopped before Future completed." not in str(e):
                 print(e)
-
-    def getChannelObjConsts(self):
-        self.GENERAL = self.get_channel(337753641299738624)
 
     def _endConnection(self):
         """
@@ -59,7 +53,7 @@ class DiscordSenses(discord.Client):
         print("\nContent")
         pp(message.content)
         ###
-        answer = self.bot.sense(DISCORD_CONTEXT, message)
+        answer = self.callback(message)
         if answer and 'SIGKILL' in answer:
             print("SIGKILL sent")
             self.endConnectionThread.start()
