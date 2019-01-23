@@ -6,3 +6,6 @@
 
 # Ignore pycaches
 __pycache__/
+
+# Fucking Windows
+Thumbs.db
