@@ -47,6 +47,6 @@ async def luigifish(discord):
     text = "@everyone I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT"
     await discord.send_file(
         destination=channel,
-        fp=os.path.join(DBPATH, "luigifish.jpg"),
+        fp=os.path.join(DBPATH, "luigifish.png"),
         content=text
     )
