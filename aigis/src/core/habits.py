@@ -6,10 +6,12 @@ DAILY:
 	- luigifish: 20:30
 
 """
+import os
+
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger as Every
 
-import src.consts
+from src.consts import SPAMMYTESTS, DBPATH
 
 
 class Habits(object):
@@ -41,6 +43,10 @@ async def luigifish(discord):
 
     :param obj discord: discord connection
     """
-    channel = discord.get_channel(consts.GENERAL)
+    channel = discord.get_channel(SPAMMYTESTS)
     text = "@everyone I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT"
-    await discord.send_file(destination=channel, fp="db/luigifish.png", content=text)
+    await discord.send_file(
+        destination=channel,
+        fp=os.path.join(DBPATH, "luigifish.jpg"),
+        content=text
+    )
