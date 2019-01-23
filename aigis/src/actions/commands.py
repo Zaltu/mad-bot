@@ -147,7 +147,8 @@ COMMANDMENTS = [
     "It's almost scary how good I am.",
     "OwO what's this?",
     "REEEEEEEEEEEEEEEEEEEEEEEEEEEE",
-    "I'VE GOT THE FEELING THAT THEY'VE GOT A SHIEEEEEEEEEELD GENERATOR!"
+    "I'VE GOT THE FEELING THAT THEY'VE GOT A SHIEEEEEEEEEELD GENERATOR!",
+    LUIGISMUG.join(["", " ALL ", " THEY ", " DO ", " IS ", " SPAM ", " GREEN ", " MARIO ", " FACE "])
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
@@ -181,7 +182,9 @@ COMMAND_KEYWORDS = {
     "i chooseth this fate of mine own free will": lambda body: body.text(VELVET_ROOM),
     "he did it": lambda body: body.text("The absolute madlad! " + LUIGICHAMP),
     "memes": lambda body: body.text("And Dreams"),
-    "black": lambda body: body.texy("What, are you racist?"),
+    "black": lambda body: body.text("What, are you racist?"),
+    ">.>": lambda body: body.text("<.<"),
+    "big gay": lambda body: body.text("DAAAAAAAAANCE"),
     AIGIS+" is true meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" ur mom gay lol": lambda body: body.text("no u"),
