@@ -1,16 +1,19 @@
 from threading import Thread
 from pprint import pprint as pp
+import os
+import json
 
 import discord
 
-import src.consts
+from src.consts import DBPATH
+
 
 class Harmony(discord.Client):
     """
     Discord API wrapper
     """
-    def __init__(self, callback, token):
-        self.token = token
+    def __init__(self, callback):
+        self.token = discordCreds()
         self.sigkill = False  # Warning! Dangerous!
         self.connectionThread = Thread(name="Start Thread", target=self._startConnection)
         self.endConnectionThread = Thread(name="End Thread", target=self._endConnection)
@@ -59,3 +62,15 @@ class Harmony(discord.Client):
             self.endConnectionThread.start()
         elif answer:
             await self.send_message(message.channel, answer)
+
+
+def discordCreds():
+    """
+    Get the discord key from the secrets file.
+
+    :returns: Discord Bot API auth key
+    :rtype: str
+    """
+    with open(os.path.join(DBPATH, 'discordKey.json'), 'r+') as secret:
+        key = json.load(secret)["key"]
+    return key
