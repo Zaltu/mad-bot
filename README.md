@@ -18,6 +18,7 @@ Since most jffs are meant as semi-easter eggs, they will not be listed here. Fun
 - `.addquote`: Store a quote related to a user
 - `.quote`: Post a quote from a user
 - `.commandment`: Post one of the N Commandments
+
 En suite, the are approximately 35 easter eggs of varying obscurity.
 
 ## Habits
@@ -27,7 +28,7 @@ Habits are repeated actions that are processed independantly of user input, gene
 - jff: Just For Fun. Most butt-ins fall in this category
 
 ### Currently Available
-Currently, there is only one habbit:
+Currently, there is only one habit:
 - luigifish: Posts luigifish every day until you like it
 
 
