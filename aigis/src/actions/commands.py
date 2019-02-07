@@ -165,9 +165,26 @@ COMMANDMENTS = [
     "OwO what's this?",
     "REEEEEEEEEEEEEEEEEEEEEEEEEEEE",
     "I'VE GOT THE FEELING THAT THEY'VE GOT A SHIEEEEEEEEEELD GENERATOR!",
-    LUIGISMUG.join(["", " ALL ", " THEY ", " DO ", " IS ", " SPAM ", " GREEN ", " MARIO ", " FACE "])
+    LUIGISMUG.join(["", " ALL ", " THEY ", " DO ", " IS ", " SPAM ", " GREEN ", " MARIO ", " FACE "]),
+    "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT",
+    "DESU VULT"
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
+
+MC_INSTALL_INSTR = """
+Steps to join the MAD Minecraft server:
+1 - Download and install Minecraft:
+https://www.minecraft.com
+2 - Download and install the Twitch client:
+https://www.twitchclient.com
+3 - After logging in to the twitch client, go to the "Mods" section that you can find on the top toolbar
+4 - Select "Install Modpack"
+5 - Download "All The Mods 3" version 0.0.0
+6 - Launch Minecraft through the Twitch Client
+7 - It takes a long time to load.
+8 - Join a multiplayer server, and add the IP:
+8.8.8.8
+"""
 
 COMMAND_KEYWORDS = {
     "hewwo": lambda body: body.text("*notices {author}* OwO who's this?"),
@@ -210,6 +227,7 @@ COMMAND_KEYWORDS = {
     AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
     ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
+    ".minecraft": lambda body: body.text(MC_INSTALL_INSTR),
     ".games": lambda body: body.games(),
     ".cookie": lambda body: body.gamecookie(),
     ".quote": lambda body: body.quote(),
