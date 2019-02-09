@@ -165,9 +165,31 @@ COMMANDMENTS = [
     "OwO what's this?",
     "REEEEEEEEEEEEEEEEEEEEEEEEEEEE",
     "I'VE GOT THE FEELING THAT THEY'VE GOT A SHIEEEEEEEEEELD GENERATOR!",
-    LUIGISMUG.join(["", " ALL ", " THEY ", " DO ", " IS ", " SPAM ", " GREEN ", " MARIO ", " FACE "])
+    LUIGISMUG.join(["", " ALL ", " THEY ", " DO ", " IS ", " SPAM ", " GREEN ", " MARIO ", " FACE "]),
+    "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT",
+    "DESU VULT"
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
+
+MC_INSTALL_INSTR = """
+Steps to join the MAD Minecraft server:
+1 - Download and install Minecraft:
+https://minecraft.net
+2 - Download and install the Twitch client:
+https://app.twitch.tv/download
+3 - After logging in to the twitch client, go to the "Mods" section that you can find on the top toolbar
+4 - Select "Minecraft"
+5 - Browse All Modpacks and search for "All The Mods 3"
+5 - Download "All The Mods 3" version 5.11.2
+6 - Launch Minecraft through the Twitch Client and log in with your Minecraft credentials
+7 - Select "Launch Options"
+8 - In the "JVM Arguments" section, set the first argument to "-Xmx10G"
+(this sets Minecraft to take up to 10 GB RAM. It generally won't hit that, but it will speed up boot time significantly)
+7 - Launch by clicking "Play" on the "News" tab. It takes a long time to load...
+8 - Once loaded, select "Multiplayer", "Add Server" and set the server address to the IP:
+{IP}
+9 - Join Server!
+"""
 
 COMMAND_KEYWORDS = {
     "hewwo": lambda body: body.text("*notices {author}* OwO who's this?"),
@@ -210,6 +232,7 @@ COMMAND_KEYWORDS = {
     AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
     ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
+    ".minecraft": lambda body: body.text(MC_INSTALL_INSTR),
     ".games": lambda body: body.games(),
     ".cookie": lambda body: body.gamecookie(),
     ".quote": lambda body: body.quote(),
