@@ -232,7 +232,7 @@ COMMAND_KEYWORDS = {
     AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
     ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
-    ".minecraft": lambda body: body.text(MC_INSTALL_INSTR),
+    ".minecraft": lambda body: body.madcraft(MC_INSTALL_INSTR),
     ".games": lambda body: body.games(),
     ".cookie": lambda body: body.gamecookie(),
     ".quote": lambda body: body.quote(),

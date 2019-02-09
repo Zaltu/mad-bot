@@ -10,7 +10,7 @@ from src.libs import backdoorgery
 from src.consts import ADMINID, DBPATH
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
-MADCRAFT_FILE = os.path.join(DBPATH, "ip.json")
+MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
 
 
 class Actions(object):
