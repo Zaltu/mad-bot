@@ -10,6 +10,7 @@ from src.libs import backdoorgery
 from src.consts import ADMINID, DBPATH
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
+MADCRAFT_FILE = os.path.join(DBPATH, "ip.json")
 
 
 class Actions(object):
@@ -121,3 +122,20 @@ class Actions(object):
             quote_file.write(json.dumps(quotes))
 
         return "I'll remember that."
+
+    def madcraft(self, instructs):
+        try:
+            ip = None
+            with open(MADCRAFT_FILE, 'r+') as ipfile:
+                ip = ipfile.readline()
+        except:
+            pass
+        if not ip:
+            return "No Madcraft set up in DB"
+        return instructs.format(IP=ip)
+
+
+
+if __name__ == "__main__":
+    A = Actions()
+    print(A.madcraft("{IP}"))
