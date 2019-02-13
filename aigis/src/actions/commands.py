@@ -217,7 +217,7 @@ COMMAND_KEYWORDS = {
     "ken": lambda body: body.text("Ken is a team-killing shit."),
     "feelsbadman": lambda body: body.text(LUIGIHANDS),
     "feels bad man": lambda body: body.text(LUIGIHANDS),
-    "skyrim": lambda body: body.text("SKYRIM BELONGS TO THE NORDS!"),
+    "skyrim": lambda body: body.text("sKyRiM bElOnGs To ThE nOrDs!"),
     "based revolver jesus": lambda body: body.text("B A S E D\nA\nS\nE\nD"),
     "i chooseth this fate of mine own free will": lambda body: body.text(VELVET_ROOM),
     "he did it": lambda body: body.text("The absolute madlad! " + LUIGICHAMP),
