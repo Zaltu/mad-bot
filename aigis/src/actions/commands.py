@@ -149,7 +149,8 @@ ANIME = [
 PERSONA_QUOTES = [
     "Celebrate life's grandeur. Its brilliance. Its magnificence.",
     "There is both joy and wonder in coming to understand another.",
-    "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits."
+    "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits.",
+    "It requires great courage to look at oneself honestly, and forge one's own path..."
 ]
 COMMANDMENTS = [
     "Traps are gay.",
