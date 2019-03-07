@@ -225,6 +225,7 @@ COMMAND_KEYWORDS = {
     "black": lambda body: body.text("What, are you racist?"),
     ">.>": lambda body: body.text("<.<"),
     "big gay": lambda body: body.text("DAAAAAAAAANCE"),
+    "no u": lambda body: body.text("GET ABSOLUTELY FUCKING REKT LOSER"),
     AIGIS+" is true meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" ur mom gay lol": lambda body: body.text("no u"),
