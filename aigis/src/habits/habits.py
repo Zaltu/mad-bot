@@ -44,7 +44,7 @@ async def luigifish(discord):
     :param obj discord: discord connection
     """
     channel = discord.get_channel(GENERAL)
-    text = "@everyone I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT"
+    text = "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT"
     await discord.send_file(
         destination=channel,
         fp=os.path.join(DBPATH, "luigifish.png"),
