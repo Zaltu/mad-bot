@@ -1,6 +1,7 @@
 """
 Functions for all possible actions
 """
+#pylint: disable=no-self-use
 import random
 import json
 import os
@@ -63,7 +64,7 @@ class Actions(object):
         """
         terms = self.vars['text'].split(" ")[1:]
         if len(terms) < 2:
-            return ".games takes a {user} and a {console}"
+            return "`games` takes a {user} and a {console}"
         return backdoorgery.getConsoleMetrics(terms[0], terms[1])
 
     def gamecookie(self):
@@ -75,7 +76,7 @@ class Actions(object):
         """
         terms = self.vars['text'].split(" ")[1:]
         if not len(terms):
-            return ".cookie takes a {user}"
+            return "`cookie` takes a {user}"
         return backdoorgery.getFortuneCookie(terms[0])
 
     def quote(self):
@@ -124,11 +125,19 @@ class Actions(object):
         return "I'll remember that."
 
     def madcraft(self, instructs):
+        """
+        Post instructions on connecting to the MC server
+
+        :param str instructs: standard instructions to format
+
+        :returns: instructions formatted with the connection IP
+        :rtype: str
+        """
         try:
             ip = None
             with open(MADCRAFT_FILE, 'r+') as ipfile:
                 ip = ipfile.readline()
-        except:
+        except:  #pylint: disable=bare-except
             pass
         if not ip:
             return "No Madcraft set up in DB"
@@ -138,4 +147,3 @@ class Actions(object):
 
 if __name__ == "__main__":
     A = Actions()
-    print(A.madcraft("{IP}"))

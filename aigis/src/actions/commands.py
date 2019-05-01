@@ -150,7 +150,7 @@ PERSONA_QUOTES = [
     "Celebrate life's grandeur. Its brilliance. Its magnificence.",
     "There is both joy and wonder in coming to understand another.",
     "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits.",
-    "It requires great courage to look at oneself honestly, and forge one's own path..."
+    "It requires great courage to look at oneself honestly, and forge one's own path."
 ]
 COMMANDMENTS = [
     "Traps are gay.",
@@ -168,7 +168,8 @@ COMMANDMENTS = [
     "I'VE GOT THE FEELING THAT THEY'VE GOT A SHIEEEEEEEEEELD GENERATOR!",
     LUIGISMUG.join(["", " ALL ", " THEY ", " DO ", " IS ", " SPAM ", " GREEN ", " MARIO ", " FACE "]),
     "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT",
-    "DESU VULT"
+    "DESU VULT",
+    "MR. Zaltu is *perfect*"
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
@@ -192,10 +193,18 @@ https://app.twitch.tv/download
 9 - Join Server!
 """
 
+EDGE = [
+    "Forgive me master, but I'll have to go all out. Just this once...",
+    "While you were having sex, I was studying the blade...",
+    "*teleports behind you* Nothing personnel, kid.",
+    "Japanese steel is unbreakble for it has been folded over a thousand times."
+]
+
 COMMAND_KEYWORDS = {
     "hewwo": lambda body: body.text("*notices {author}* OwO who's this?"),
     "gay tripping": lambda body: body.text("Is gay."),
     "13": lambda body: body.text("Sir, blame it on your ISP"),
+    "mei": lambda body: body.text("A-MEI-ZING!"),
     "how do you turn this on": lambda body: body.text("Vroom vroom"),
     "can't stop": lambda body: body.text("WONT STOP"),
     "cant stop": lambda body: body.text("WONT STOP"),
@@ -208,6 +217,8 @@ COMMAND_KEYWORDS = {
     "booli": lambda body: body.text(LUIGINA),
     "doomfist": lambda body: body.text(DOOMFIST),
     "headshot": lambda body: body.text(HEADSHOT),
+    "benedict cumberbatch": lambda body: body.text("Beneficial Cucumber"),
+    "monster hunter": lambda body: body.text("{author} Shit game"),
     "monhun": lambda body: body.text("{author} Shit game"),
     "hunmon": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
     "mon hun": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
@@ -231,24 +242,39 @@ COMMAND_KEYWORDS = {
     "black": lambda body: body.text("What, are you racist?"),
     "why are you buying clothes in the soup store": lambda body: body.text("FUCK\nYOU"),
     "rawr": lambda body: body.text("XD"),
+    "xd": lambda body: body.text("Rawr XD"),
     ">.>": lambda body: body.text("<.<"),
     "<.<": lambda body: body.text(">.>"),
-    "loli": lambda body: body.text("UwU UwU IT'S THE SOUND OF THE LOLICE"),
+    "loli": lambda body: body.text("UWU UWU IT'S THE SOUND OF THE LOLICE"),
     "big gay": lambda body: body.text("DAAAAAAAAANCE"),
     "no u": lambda body: body.text("GET ABSOLUTELY FUCKING REKT LOSER"),
     "ur mom gay lol": lambda body: body.text("no u"),
-    AIGIS+" is true meaning life": lambda body: body.text("42 of course"),
+    "based": lambda body: body.text("based *and* redpilled"),
+    "mexican": lambda body: body.text("The wall just got 10 feet higher!"),
+    "mexicans": lambda body: body.text("The wall just got 10 feet higher!"),
+    "mexico": lambda body: body.text("The wall just got 10 feet higher!"),
+    "country roads": lambda body: body.text("Take me hooome"),
+    "to the place": lambda body: body.text("I belooooooong"),
+    "west virginia": lambda body: body.text("WEST VIRGINIA"),
+    "learn this power": lambda body: body.text("Not from a Jedi..."),
+    "i did not hit her": lambda body: body.text("Oh hi Mark"),
+    "cherry": lambda body: body.text("Lero lero lero lero lero lero lero lero lero\nlero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero"),
+    "not like i want": lambda body: body.text("B-B-BAKA!!"),
+    "thot": lambda body: body.text("BEGONE, THOT!"),
+    AIGIS+" meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
     AIGIS+" sing song": lambda body: body.text(AIGIS_SONG),
     AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
-    ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
-    ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
-    ".minecraft": lambda body: body.madcraft(MC_INSTALL_INSTR),
-    ".games": lambda body: body.games(),
-    ".cookie": lambda body: body.gamecookie(),
-    ".quote": lambda body: body.quote(),
-    ".addquote": lambda body: body.addquote(),
-    ".owo": lambda body: body.owo(),
+    AIGIS+" persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
+    AIGIS+" commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
+    AIGIS+" minecraft": lambda body: body.madcraft(MC_INSTALL_INSTR),
+    AIGIS+" games": lambda body: body.games(),
+    AIGIS+" cookie": lambda body: body.gamecookie(),
+    AIGIS+" quote": lambda body: body.quote(),
+    AIGIS+" addquote": lambda body: body.addquote(),
+    AIGIS+" owo": lambda body: body.owo(),
+    AIGIS+" edge": lambda body: body.text(random.sample(EDGE, 1)[0]),
+    AIGIS+" fortune": lambda body: body.text("{author} "+random.sample(PERSONA_QUOTES, 1)[0]),
     "dcpls": lambda body: body.sigkill(),
 }

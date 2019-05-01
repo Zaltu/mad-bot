@@ -13,23 +13,19 @@ Actions are functionality that is brought about as a reaction to user input. Whi
 
 ### Currently Available
 Since most jffs are meant as semi-easter eggs, they will not be listed here. Functions are:
-- `.cookie`: Pull a single game from a person's backloggery
-- `.games`: Pull a user's stats for a specific game console
-- `.addquote`: Store a quote related to a user
-- `.quote`: Post a quote from a user
-- `.commandment`: Post one of the N Commandments
+- `@Aigis cookie`: Pull a single game from a person's backloggery
+- `@Aigis games`: Pull a user's stats for a specific game console
+- `@Aigis addquote`: Store a quote related to a user
+- `@Aigis quote`: Post a quote from a user
+- `@Aigis commandment`: Post one of the N Commandments
 
 En suite, the are approximately 35 easter eggs of varying obscurity.
 
 ## Habits
-Habits are repeated actions that are processed independantly of user input, generally on a daily or so basis. There is no user input invloved, but the other semantical types still apply.
+Habits are repeated actions that are processed independantly of user input, generally on a daily or so basis. There is no user input invloved, but the other semantical types still apply. Currently, they're all JFF
 
 - functions: Features that actually serve a purpose and/or can be useful
 - jff: Just For Fun. Most butt-ins fall in this category
-
-### Currently Available
-Currently, there is only one habit:
-- luigifish: Posts luigifish every day until you like it
 
 
 # Requirements

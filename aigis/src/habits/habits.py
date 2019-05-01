@@ -4,6 +4,8 @@ Timechunks should be randomized within themselves
 
 DAILY:
 	- luigifish: 20:30
+ANNUALY:
+    - memento mori: 08:30
 
 """
 import os
@@ -39,7 +41,7 @@ class Habits(object):
         self.schedule.add_job(
             memento,
             args=[self.discord],
-            trigger=Every(days=365, start_date="2019-03-05T20:30:00")
+            trigger=Every(days=365, start_date="2019-03-05T08:30:00")
         )
 
 
