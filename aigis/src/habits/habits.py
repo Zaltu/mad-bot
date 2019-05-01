@@ -36,6 +36,12 @@ class Habits(object):
             trigger=Every(days=1, start_date="2019-01-01T20:30:00")
         )
 
+        self.schedule.add_job(
+            memento,
+            args=[self.discord],
+            trigger=Every(days=365, start_date="2019-03-05T20:30:00")
+        )
+
 
 async def luigifish(discord):
     """
@@ -50,3 +56,13 @@ async def luigifish(discord):
         fp=os.path.join(DBPATH, "luigifish.png"),
         content=text
     )
+
+async def memento(discord):
+    """
+    Remember your mortality
+
+    :param obj discord: discord connection
+    """
+    channel = discord.get_channel(GENERAL)
+    text = "Memento Mori"
+    await discord.send_message(channel, text)
