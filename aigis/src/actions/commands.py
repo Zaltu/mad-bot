@@ -1,6 +1,7 @@
 """
 All command keywords. JFF or not.
 """
+#pylint: disable=line-too-long
 import random
 
 from src.consts import AIGIS, ZALTU, PAUL
@@ -119,7 +120,7 @@ HIGH_IQ_SHOTGUN = ("To be fair, you have to have a very high IQ to understand Sh
                    "Project already exists,\" which itself is a cryptic reference to Turgenev's Russian "
                    "epic Fathers and Sons. I'm smirking right now just imagining one of those addlepated "
                    "simpletons scratching their heads in confusion as Don Parker's genius wit unfolds "
-                   "itself on their computer screens. What fools.. how I pity them. :joy:\n\n And yes, "
+                   "itself on their computer screens. What fools.. how I pity them. :joy:\n\nAnd yes, "
                    "by the way, i DO have a Shotgun tattoo. And no, you cannot see it. It's for the "
                    "ladies' eyes only- and even then they have to demonstrate that they're within 5 "
                    "IQ points of my own (preferably lower) beforehand. Nothin personnel kid :sunglasses:")
@@ -144,7 +145,8 @@ ANIME = [
     "Black Lagoon",
     "Jormungand",
     "Durarara, mainly because the OP1 is amazing",
-    "Eiken"
+    "Eiken",
+    "KissXSis OwO"
 ]
 PERSONA_QUOTES = [
     "Celebrate life's grandeur. Its brilliance. Its magnificence.",
@@ -169,7 +171,11 @@ COMMANDMENTS = [
     LUIGISMUG.join(["", " ALL ", " THEY ", " DO ", " IS ", " SPAM ", " GREEN ", " MARIO ", " FACE "]),
     "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT",
     "DESU VULT",
-    "MR. Zaltu is *perfect*"
+    "MR. Zaltu is *perfect*",
+    "Frank has the Joker",
+    "Do you like\nMy car?",
+    "Everybody cheating but Waluigi",
+    "Love Skal, always our pride."
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
@@ -196,8 +202,9 @@ https://app.twitch.tv/download
 EDGE = [
     "Forgive me master, but I'll have to go all out. Just this once...",
     "While you were having sex, I was studying the blade...",
-    "*teleports behind you* Nothing personnel, kid.",
-    "Japanese steel is unbreakble for it has been folded over a thousand times."
+    "*teleports behind you*\nNothing personnel, kid.",
+    "Japanese steel is unbreakble for it has been folded over a thousand times.",
+    "In this moment, I am euphoric. Not because of some phony god's blessing, but because I am enlightened by my own intelligence."
 ]
 
 COMMAND_KEYWORDS = {
@@ -245,9 +252,10 @@ COMMAND_KEYWORDS = {
     "xd": lambda body: body.text("Rawr XD"),
     ">.>": lambda body: body.text("<.<"),
     "<.<": lambda body: body.text(">.>"),
+    "hentai": lambda body: body.text("Link please!"),
     "loli": lambda body: body.text("UWU UWU IT'S THE SOUND OF THE LOLICE"),
     "big gay": lambda body: body.text("DAAAAAAAAANCE"),
-    "no u": lambda body: body.text("GET ABSOLUTELY FUCKING REKT LOSER"),
+    "no u": lambda body: body.text("HA! GET ABSOLUTELY FUCKING REKT LOSER"),
     "ur mom gay lol": lambda body: body.text("no u"),
     "based": lambda body: body.text("based *and* redpilled"),
     "mexican": lambda body: body.text("The wall just got 10 feet higher!"),
@@ -261,6 +269,21 @@ COMMAND_KEYWORDS = {
     "cherry": lambda body: body.text("Lero lero lero lero lero lero lero lero lero\nlero lero lero lero lero lero lero lero lero lero lero lero lero lero lero lero"),
     "not like i want": lambda body: body.text("B-B-BAKA!!"),
     "thot": lambda body: body.text("BEGONE, THOT!"),
+    "im the trashman": lambda body: body.text("I GET OUT THERE\nAND I START EATING GARBAGE"),
+    "really makes think": lambda body: body.text("Gives you the big think, even."),
+    "gg": lambda body: body.text("ez"),
+    "bingo bang": lambda body: body.text("The name's McCree."),
+    "elf": lambda body: body.text("Around elves, watch yourselves."),
+    "elves": lambda body: body.text("Around elves, watch yourselves."),
+    "against the rules": lambda body: body.text("Screw the rules I have money."),
+    "milk soda": lambda body: body.text("THE COOL REFRESHING TASTE OF SKAL"),
+    "boring around here": lambda body: body.text("MAH BOI, THIS PEACE IS WHAT ALL TRUE WARRIORS STRIVE FOR"),
+    "nyaa": lambda body: body.text(":3"),
+    "french": lambda body: body.text("hon hon baguette du fromage"),
+    "mlady": lambda body: body.text("*tips fedora*"),
+    "i do not do die": lambda body: body.text("YOU do die!"),
+    "captcha": lambda body: body.text("I am *not* a robot! >.<"),
+    "pomf": lambda body: body.text("What're we going to do on the bed? OwO"),
     AIGIS+" meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
@@ -274,6 +297,13 @@ COMMAND_KEYWORDS = {
     AIGIS+" quote": lambda body: body.quote(),
     AIGIS+" addquote": lambda body: body.addquote(),
     AIGIS+" owo": lambda body: body.owo(),
+    AIGIS+" whats plus": lambda body: body.text("Twenty-one?"),
+    AIGIS+" whats minus": lambda body: body.text("Twenty-one?"),
+    AIGIS+" whats times": lambda body: body.text("Twenty-one?"),
+    AIGIS+" whats over": lambda body: body.text("Twenty-one?"),
+    AIGIS+" whats divided by": lambda body: body.text("Twenty-one?"),
+    AIGIS+" bitch": lambda body: body.text("no u"),
+    AIGIS+" you suck": lambda body: body.text("{author} Jealous? I'm sure there's plenty of dick left for you."),
     AIGIS+" edge": lambda body: body.text(random.sample(EDGE, 1)[0]),
     AIGIS+" fortune": lambda body: body.text("{author} "+random.sample(PERSONA_QUOTES, 1)[0]),
     "dcpls": lambda body: body.sigkill(),

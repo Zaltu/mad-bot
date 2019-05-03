@@ -37,7 +37,7 @@ class Reactor(object):
             'author': "<@!"+delta.author.id+">",
             'input': delta
         }
-        words = re.sub('[!#$,:;?]', '', delta.content.lower())
+        words = re.sub("[!#$,':;?]", '', delta.content.lower())
         words = set(words.split(" "))
         most = 0
         command = None
