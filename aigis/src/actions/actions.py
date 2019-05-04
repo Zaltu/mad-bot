@@ -62,7 +62,7 @@ class Actions(object):
         :returns: the command terms if improperly called or a user's console metrics
         :rtype: str
         """
-        terms = self.vars['text'].split(" ")[1:]
+        terms = self.vars['text'].split(" ")[2:]
         if len(terms) < 2:
             return "`games` takes a {user} and a {console}"
         return backdoorgery.getConsoleMetrics(terms[0], terms[1])
@@ -74,7 +74,7 @@ class Actions(object):
         :returns: a random game or the command syntax
         :rtype: str
         """
-        terms = self.vars['text'].split(" ")[1:]
+        terms = self.vars['text'].split(" ")[2:]
         if not len(terms):
             return "`cookie` takes a {user}"
         return backdoorgery.getFortuneCookie(terms[0])
@@ -87,7 +87,7 @@ class Actions(object):
         :rtype: str
         """
         try:
-            quotee = self.vars['text'].split(" ")[1]
+            quotee = self.vars['text'].split(" ")[2]
         except (KeyError, IndexError):
             return "No one to quote"
         with open(QUOTES_FILE, 'r+') as quote_file:
@@ -108,8 +108,8 @@ class Actions(object):
         """
         terms = self.vars["text"].split(" ")
         try:
-            quotee = terms[1]
-            quote = " ".join(terms[2:])
+            quotee = terms[2]
+            quote = " ".join(terms[3:])
         except (KeyError, IndexError):
             return "Woah there son, you aren't even quoting anything."
         formattedQuote = quote + "\n        - " + quotee
