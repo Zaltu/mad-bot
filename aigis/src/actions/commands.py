@@ -201,10 +201,11 @@ https://app.twitch.tv/download
 
 EDGE = [
     "Forgive me master, but I'll have to go all out. Just this once...",
-    "While you were having sex, I was studying the blade...",
+    "While you were having premarital sex, I was studying the blade...",
     "*teleports behind you*\nNothing personnel, kid.",
     "Japanese steel is unbreakble for it has been folded over a thousand times.",
-    "In this moment, I am euphoric. Not because of some phony god's blessing, but because I am enlightened by my own intelligence."
+    "In this moment, I am euphoric. Not because of some phony god's blessing, but because I am enlightened by my own intelligence.",
+    "BORN IN A WORLD OF STRIFE\nAGAINST THE ODDS\nWE CHOOSE TO FIGHT\n\nBLOSSOM DANCE"
 ]
 
 COMMAND_KEYWORDS = {
@@ -289,14 +290,6 @@ COMMAND_KEYWORDS = {
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
     AIGIS+" sing song": lambda body: body.text(AIGIS_SONG),
     AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
-    AIGIS+" persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
-    AIGIS+" commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
-    AIGIS+" minecraft": lambda body: body.madcraft(MC_INSTALL_INSTR),
-    AIGIS+" games": lambda body: body.games(),
-    AIGIS+" cookie": lambda body: body.gamecookie(),
-    AIGIS+" quote": lambda body: body.quote(),
-    AIGIS+" addquote": lambda body: body.addquote(),
-    AIGIS+" owo": lambda body: body.owo(),
     AIGIS+" whats plus": lambda body: body.text("Twenty-one?"),
     AIGIS+" whats minus": lambda body: body.text("Twenty-one?"),
     AIGIS+" whats times": lambda body: body.text("Twenty-one?"),
@@ -304,7 +297,17 @@ COMMAND_KEYWORDS = {
     AIGIS+" whats divided by": lambda body: body.text("Twenty-one?"),
     AIGIS+" bitch": lambda body: body.text("no u"),
     AIGIS+" you suck": lambda body: body.text("{author} Jealous? I'm sure there's plenty of dick left for you."),
-    AIGIS+" edge": lambda body: body.text(random.sample(EDGE, 1)[0]),
-    AIGIS+" fortune": lambda body: body.text("{author} "+random.sample(PERSONA_QUOTES, 1)[0]),
+    ".edge": lambda body: body.text(random.sample(EDGE, 1)[0]),
+    ".fortune": lambda body: body.text("{author} "+random.sample(PERSONA_QUOTES, 1)[0]),
+    ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
+    ".commandment": lambda body: body.text(COMMANDMENTWRAPPER.format(commandment=random.sample(COMMANDMENTS, 1)[0])),
+    ".minecraft": lambda body: body.madcraft(MC_INSTALL_INSTR),
+    ".games": lambda body: body.games(),
+    ".cookie": lambda body: body.gamecookie(),
+    ".quote": lambda body: body.quote(),
+    ".addquote": lambda body: body.addquote(),
+    ".owo": lambda body: body.owo(),
+    ".aigif": lambda body: body.aigif(),
+    ".kona": lambda body: body.aigif(),
     "dcpls": lambda body: body.sigkill(),
 }

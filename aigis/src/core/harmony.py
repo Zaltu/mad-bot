@@ -71,6 +71,6 @@ def discordCreds():
     :returns: Discord Bot API auth key
     :rtype: str
     """
-    with open(os.path.join(DBPATH, 'discordKey.json'), 'r+') as secret:
+    with open(os.path.join(DBPATH, 'discordKey.secret'), 'r+') as secret:
         key = json.load(secret)["key"]
     return key

@@ -10,5 +10,5 @@ __pycache__/
 # Fucking Windows
 Thumbs.db
 
-# Ignore discord token
-discordKey.*
+# Ignore secrets
+*.secret

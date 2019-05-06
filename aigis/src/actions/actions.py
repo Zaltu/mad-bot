@@ -6,12 +6,17 @@ import random
 import json
 import os
 
+import requests
+
 from src.libs import backdoorgery
 
 from src.consts import ADMINID, DBPATH
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
+TENOR_FILE = os.path.join(DBPATH, "tenor.secret")
+
+TENOR_URL = "https://api.tenor.com/v1/search?q={keyword}&key={key}&limit=1&media_filter=minimal"
 
 
 class Actions(object):
@@ -142,6 +147,40 @@ class Actions(object):
         if not ip:
             return "No Madcraft set up in DB"
         return instructs.format(IP=ip)
+
+    def aigif(self):
+        """
+        Searches for a (reasonably relevant) gif.
+        Currently just from tenor. Might look into flavouring in the future
+
+        String type return will eventually be deprecated in favor of
+        download/clean workflow for cleaner responses
+
+        :returns: Tenor gif URL
+        :rtype: str
+        """
+        with open(TENOR_FILE, 'r') as secret_file:
+            key = json.load(secret_file)['key']
+        # Full text but pop the first element which should be the command
+        keywords = " ".join(self.vars["text"].split(" ")[1:])
+
+        tenor_san = requests.get(TENOR_URL.format(keyword=keywords, key=key)).json()
+        return tenor_san['results'][0]['url']
+
+    def kona(self):
+        """
+        Posts one of the top results for a specific set of keywords from konachan
+
+        String type return will eventually be deprecated in favor of
+        download/clean workflow for cleaner responses
+
+        :returns: konachan image URL
+        :rtype: str
+        """
+        keywords = " ".join(self.vars["text"].split(" ")[1:])
+        return "NYI"
+        #tenor_san = requests.get(TENOR_URL.format(keyword=keywords, key=key)).json()
+        #return tenor_san['results'][0]['url']
 
 
 
