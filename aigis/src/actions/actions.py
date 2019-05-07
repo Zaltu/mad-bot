@@ -12,11 +12,17 @@ from src.libs import backdoorgery
 
 from src.consts import ADMINID, DBPATH
 
+from src.actions.commands import LUIGIHANDS
+
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
 TENOR_FILE = os.path.join(DBPATH, "tenor.secret")
 
 TENOR_URL = "https://api.tenor.com/v1/search?q={keyword}&key={key}&limit=1&media_filter=minimal"
+KONA_URL = "https://konachan.com/post.json?page=1&limit=1&tags={tags}"
+BOORU_URL = "https://danbooru.donmai.us/posts.json?limit=1&page=1&tags={tags}"
+GEL_URL = "https://gelbooru.com//index.php?page=dapi&s=post&q=index&json=1&pid=1&limit=1&tags={tags}"
+
 
 
 class Actions(object):
@@ -167,22 +173,52 @@ class Actions(object):
         tenor_san = requests.get(TENOR_URL.format(keyword=keywords, key=key)).json()
         return tenor_san['results'][0]['url']
 
-    def kona(self):
+    def weeb(self):
         """
-        Posts one of the top results for a specific set of keywords from konachan
+        Posts one of the top results for a specific set of keywords from
+        a booru. Search order is Konachan -> Danbooru -> Gelbooru
+
+        NOT sfw filtered... Partially cause I'm not sure I know how.
 
         String type return will eventually be deprecated in favor of
         download/clean workflow for cleaner responses
 
-        :returns: konachan image URL
+        :returns: danbooru image URL
         :rtype: str
         """
-        keywords = " ".join(self.vars["text"].split(" ")[1:])
-        return "NYI"
-        #tenor_san = requests.get(TENOR_URL.format(keyword=keywords, key=key)).json()
-        #return tenor_san['results'][0]['url']
+        # Full text but pop the first element which should be the command
+        keywords = self.vars["text"].split(" ")
+        tags = "+".join(keywords[1:])
+        return _kona(tags) or _booru(tags) or _gel(tags) or "No results " + LUIGIHANDS
+
+
+def _kona(tags):
+    kona_chan = requests.get(KONA_URL.format(tags=tags)).json()
+    if kona_chan:
+        return kona_chan[0]['file_url']
+    return None
+
+
+def _booru(tags):
+    booru_chan = requests.get(BOORU_URL.format(tags=tags)).json()
+    if booru_chan:
+        return booru_chan[0]['file_url']
+    return None
+
+
+def _gel(tags):
+    try:
+        gel_chan = requests.get(GEL_URL.format(tags=tags)).json()
+    except json.decoder.JSONDecodeError:
+        gel_chan = None
+    if gel_chan:
+        return gel_chan[0]['file_url']
+    return None
 
 
 
 if __name__ == "__main__":
+    # Doesnt work cause python luigihands
     A = Actions()
+    A.vars = {"text":".weeb luigi"}
+    print(A.weeb())

@@ -308,6 +308,6 @@ COMMAND_KEYWORDS = {
     ".addquote": lambda body: body.addquote(),
     ".owo": lambda body: body.owo(),
     ".aigif": lambda body: body.aigif(),
-    ".kona": lambda body: body.aigif(),
+    ".weeb": lambda body: body.weeb(),
     "dcpls": lambda body: body.sigkill(),
 }
