@@ -12,7 +12,7 @@ from src.libs import backdoorgery
 
 from src.consts import ADMINID, DBPATH
 
-from src.actions.commands import LUIGIHANDS
+from src.actions.commands import LUIGIHANDS, LOWOGI
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
@@ -53,7 +53,7 @@ class Actions(object):
         :returns: lowogi
         :rtype: str
         """
-        return "<:lowogi:510216907987746819>"
+        return "Nyaat yet impwemented " + LOWOGI
 
     def sigkill(self):
         """

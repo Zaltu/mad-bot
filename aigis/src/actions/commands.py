@@ -208,6 +208,26 @@ EDGE = [
     "BORN IN A WORLD OF STRIFE\nAGAINST THE ODDS\nWE CHOOSE TO FIGHT\n\nBLOSSOM DANCE"
 ]
 
+HELP = """
+`.quote {user}`: quote a user.
+    `.quote @Zaltu`
+`.addquote {user} {text}`: add a quote to a user.
+    `.addquote @Zaltu We still need communism
+`.games {user} {console}`: display the user's Backloggery information for a given console.
+    `.games zaltu pc`
+`.cookie {user}`: Select a random game from a user's Backloggery.
+    `.cookie zaltu`
+`.commandment`: Display one of the N commandments.
+`.minecraft`: Display the information on how to connect to the MAD minecraft server
+`.aigif {tag}`: Post a gif based on the given tag.
+    `.aigif pikachu`
+`.weeb {tags}`: Post an anime picture based on the tags provided (NSFW until I figure out how to filter it).
+    `.weeb cute neko`
+`.fortune`: Display your fortune
+`.edge`: Ow the edge
+`.help`: Display this post
+"""
+
 COMMAND_KEYWORDS = {
     "hewwo": lambda body: body.text("*notices {author}* OwO who's this?"),
     "gay tripping": lambda body: body.text("Is gay."),
@@ -309,5 +329,6 @@ COMMAND_KEYWORDS = {
     ".owo": lambda body: body.owo(),
     ".aigif": lambda body: body.aigif(),
     ".weeb": lambda body: body.weeb(),
+    ".help": lambda body: body.text(HELP),
     "dcpls": lambda body: body.sigkill(),
 }
