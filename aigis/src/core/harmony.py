@@ -61,7 +61,7 @@ class Harmony(discord.Client):
             print("SIGKILL sent")
             self.endConnectionThread.start()
         elif answer:
-            await self.send_message(message.channel, answer)
+            await message.channel.send(answer)
 
 
 def discordCreds():

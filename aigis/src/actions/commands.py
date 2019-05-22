@@ -209,19 +209,19 @@ EDGE = [
 ]
 
 HELP = """
-`.quote {user}`: quote a user.
+`.quote [user]`: quote a user.
     `.quote @Zaltu`
-`.addquote {user} {text}`: add a quote to a user.
+`.addquote [user] [text]`: add a quote to a user.
     `.addquote @Zaltu We still need communism
-`.games {user} {console}`: display the user's Backloggery information for a given console.
+`.games [user] [console]`: display the user's Backloggery information for a given console.
     `.games zaltu pc`
-`.cookie {user}`: Select a random game from a user's Backloggery.
+`.cookie [user]`: Select a random game from a user's Backloggery.
     `.cookie zaltu`
 `.commandment`: Display one of the N commandments.
 `.minecraft`: Display the information on how to connect to the MAD minecraft server
-`.aigif {tag}`: Post a gif based on the given tag.
+`.aigif [tag]`: Post a gif based on the given tag.
     `.aigif pikachu`
-`.weeb {tags}`: Post an anime picture based on the tags provided (NSFW until I figure out how to filter it).
+`.weeb [tags]`: Post an anime picture based on the tags provided (NSFW until I figure out how to filter it).
     `.weeb cute neko`
 `.fortune`: Display your fortune
 `.edge`: Ow the edge

@@ -13,3 +13,7 @@ Thumbs.db
 # Ignore secrets
 *.secret
 *.config
+
+
+# Ignore vscode
+.vscode/

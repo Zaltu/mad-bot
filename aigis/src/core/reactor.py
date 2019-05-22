@@ -26,6 +26,7 @@ class Reactor(object):
         :returns: message to post, if applicable
         :rtype: str|None
         """
+
         if delta.author.id == AIGISID:
             # Ignore self-driven actions
             return
@@ -34,7 +35,7 @@ class Reactor(object):
         self.body.vars = {
             'text': delta.content,
             'channel': delta.channel,
-            'author': "<@!"+delta.author.id+">",
+            'author': "<@!%s>" % delta.author.id,
             'input': delta
         }
         words = re.sub("[!#$,':;?]", '', delta.content.lower())

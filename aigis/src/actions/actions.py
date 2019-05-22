@@ -41,6 +41,7 @@ class Actions(object):
         :returns: the text param
         :rtype: str
         """
+        print(self.vars)
         return text.format(author=self.vars['author'],
                            channel=self.vars['channel'],
                            input=self.vars['input'])
@@ -62,6 +63,7 @@ class Actions(object):
         :returns: a dc signal
         :rtype: str
         """
+        print(self.vars["input"].author.id)
         if self.vars["input"].author.id in ADMINID:
             return "SIGKILL"
         return "You can't tell me what to do."
@@ -73,7 +75,9 @@ class Actions(object):
         :returns: the command terms if improperly called or a user's console metrics
         :rtype: str
         """
-        terms = self.vars['text'].split(" ")[2:]
+        print(self.vars["text"])
+        terms = self.vars['text'].split(" ")[1:]
+        print(terms)
         if len(terms) < 2:
             return "`games` takes a {user} and a {console}"
         return backdoorgery.getConsoleMetrics(terms[0], terms[1])
@@ -85,7 +89,7 @@ class Actions(object):
         :returns: a random game or the command syntax
         :rtype: str
         """
-        terms = self.vars['text'].split(" ")[2:]
+        terms = self.vars['text'].split(" ")[1:]
         if not len(terms):
             return "`cookie` takes a {user}"
         return backdoorgery.getFortuneCookie(terms[0])
@@ -98,7 +102,7 @@ class Actions(object):
         :rtype: str
         """
         try:
-            quotee = self.vars['text'].split(" ")[2]
+            quotee = self.vars['text'].split(" ")[1]
         except (KeyError, IndexError):
             return "No one to quote"
         with open(QUOTES_FILE, 'r+') as quote_file:
@@ -120,7 +124,7 @@ class Actions(object):
         terms = self.vars["text"].split(" ")
         try:
             quotee = terms[2]
-            quote = " ".join(terms[3:])
+            quote = " ".join(terms[2:])
         except (KeyError, IndexError):
             return "Woah there son, you aren't even quoting anything."
         formattedQuote = quote + "\n        - " + quotee
