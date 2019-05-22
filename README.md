@@ -20,7 +20,8 @@ Habits are repeated actions that are processed independantly of user input, gene
 
 
 # Requirements
-- Python 3.6 :luigihands:
-- APScheduler
-- discord
-- zaltu/backdoorgery (bundled)
+__Python 3.6 :luigihands:__
+- discord 1.0.1
+- APScheduler 3.6.0
+- pyquery 1.4.0
+- zaltu/backdoorgery | master branch (bundled)
