@@ -123,7 +123,7 @@ class Actions(object):
         """
         terms = self.vars["text"].split(" ")
         try:
-            quotee = terms[2]
+            quotee = terms[1]
             quote = " ".join(terms[2:])
         except (KeyError, IndexError):
             return "Woah there son, you aren't even quoting anything."
