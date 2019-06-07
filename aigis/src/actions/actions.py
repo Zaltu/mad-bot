@@ -7,11 +7,11 @@ import json
 import os
 
 import requests
+import wikipedia
 
 from src.libs import backdoorgery
 
 from src.consts import ADMINID, DBPATH
-
 from src.actions.commands import LUIGIHANDS, LOWOGI
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
@@ -90,7 +90,7 @@ class Actions(object):
         :rtype: str
         """
         terms = self.vars['text'].split(" ")[1:]
-        if not len(terms):
+        if not terms:
             return "`cookie` takes a {user}"
         return backdoorgery.getFortuneCookie(terms[0])
 
@@ -195,8 +195,30 @@ class Actions(object):
         tags = "+".join(keywords[1:])
         return _kona(tags) or _booru(tags) or _gel(tags) or "No results " + LUIGIHANDS
 
+    def wiki(self):
+        """
+        Posts the summary of an article matching the search terms from Wikipedia.
+
+        :returns: article summary
+        :rtype: str
+        """
+        keywords = self.vars["text"].split(" ")
+        terms = " ".join(keywords[1:])
+        try:
+            return wikipedia.summary(terms)
+        except wikipedia.exceptions.PageError:
+            return "No article found matching the term \"{}\"".format(terms)
+
 
 def _kona(tags):
+    """
+    Fetch image from konachan
+
+    :param str tags: tags to search for
+
+    :returns: image URL
+    :rtype: str
+    """
     kona_chan = requests.get(KONA_URL.format(tags=tags)).json()
     if kona_chan:
         return kona_chan[0]['file_url']
@@ -204,6 +226,14 @@ def _kona(tags):
 
 
 def _booru(tags):
+    """
+    Fetch image from danbooru
+
+    :param str tags: tags to search for
+
+    :returns: image URL
+    :rtype: str
+    """
     booru_chan = requests.get(BOORU_URL.format(tags=tags)).json()
     if booru_chan:
         return booru_chan[0]['file_url']
@@ -211,6 +241,14 @@ def _booru(tags):
 
 
 def _gel(tags):
+    """
+    Fetch image from gelbooru
+
+    :param str tags: tags to search for
+
+    :returns: image URL
+    :rtype: str
+    """
     try:
         gel_chan = requests.get(GEL_URL.format(tags=tags)).json()
     except json.decoder.JSONDecodeError:
@@ -224,5 +262,5 @@ def _gel(tags):
 if __name__ == "__main__":
     # Doesnt work cause python luigihands
     A = Actions()
-    A.vars = {"text":".weeb luigi"}
-    print(A.weeb())
+    A.vars = {"text":".teach Luigi"}
+    print(A.wiki())

@@ -225,6 +225,7 @@ HELP = """
     `.weeb cute neko`
 `.fortune`: Display your fortune
 `.edge`: Ow the edge
+`.teach [term]`: School some noobs on a subject
 `.help`: Display this post
 """
 
@@ -329,6 +330,7 @@ COMMAND_KEYWORDS = {
     ".owo": lambda body: body.owo(),
     ".aigif": lambda body: body.aigif(),
     ".weeb": lambda body: body.weeb(),
+    ".teach": lambda body: body.wiki(),
     ".help": lambda body: body.text(HELP),
     "dcpls": lambda body: body.sigkill(),
 }
