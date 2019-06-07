@@ -24,4 +24,5 @@ __Python 3.6 :luigihands:__
 - discord 1.0.1
 - APScheduler 3.6.0
 - pyquery 1.4.0
+- wikipedia 1.4.0
 - zaltu/backdoorgery | master branch (bundled)
