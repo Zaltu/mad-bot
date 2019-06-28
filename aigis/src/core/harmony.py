@@ -1,6 +1,7 @@
 """
 Mad bot wrapper around the discord python API
 """
+#pylint: disable=missing-yield-doc,missing-yield-type-doc
 from threading import Thread
 from pprint import pprint as pp
 import os
@@ -11,6 +12,8 @@ import discord
 
 from src.consts import DBPATH
 
+
+MAX_LENGTH_MESSAGE = 1900
 
 class Harmony(discord.Client):
     """
@@ -73,7 +76,8 @@ class Harmony(discord.Client):
         :param discord.channel channel: channel to send the message to
         :param str message: message to send
         """
-        await channel.send(message)
+        for chunk in _chunksToMaxChars(message):
+            await channel.send(chunk)
 
     def sendMessage(self, channel, message):
         """
@@ -129,3 +133,28 @@ def default_on_message(message):
     print("\nContent")
     pp(message.content)
     return ""
+
+
+
+def _chunksToMaxChars(message):
+    """
+    Discord accepts up to 2000 characters in a single message.
+    This creates an iterator splitting a string into chunks of acceptable length.
+    This function is NOT EFFICIENT.
+
+    :param str message: string to truncate
+
+    :yields: chunked string to 1900 characters, ceilinged to the nearest word.
+    :yieldtype: str
+    """
+    # Most messages should be under the limit, let's be at least a little efficient here...
+    if len(message) < MAX_LENGTH_MESSAGE:
+        yield message
+        return
+    splitstr = message.split(" ")
+    i = 0
+    while i < len(splitstr):
+        beginOffset = i
+        while len(" ".join(splitstr[beginOffset:i])) < MAX_LENGTH_MESSAGE and i < len(splitstr):
+            i += 1
+        yield " ".join(splitstr[beginOffset:i])
