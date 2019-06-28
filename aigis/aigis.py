@@ -1,8 +1,6 @@
 """
 Main bot control center
 """
-# Disable pylint error since async non-def causes file to be percieved as erroneous
-#pylint:disable=no-name-in-module
 
 from src.core.reactor import Reactor
 from src.core.harmony import Harmony
@@ -15,7 +13,7 @@ class Aigis(object):
     def __init__(self):
         self.name = "Aigis"
         self.delta = "Aware"
-        self.harmony = Harmony(self.react)
+        self.harmony = Harmony(on_message_callback=self.react)
         self.harmony.activate()
         self.mind = Reactor(self)
         self.habits = Habits(self.harmony)

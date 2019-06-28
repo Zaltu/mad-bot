@@ -1,7 +1,6 @@
 """
 Functions for all possible actions
 """
-#pylint: disable=no-self-use
 import random
 import json
 import os
@@ -28,105 +27,84 @@ GEL_URL = "https://gelbooru.com//index.php?page=dapi&s=post&q=index&json=1&pid=1
 class Actions(object):
     """
     Possible 'actions' the bot may take.
+
+    :param Aigis bot: parent bot containing app features.
     """
-    def __init__(self):
+    def __init__(self, bot):
         self.vars = {}
+        self.parent = bot
+        self.post = self.parent.harmony.sendMessage
 
     def text(self, text):
         """
         1 Billion IQ Developer
 
         :param str text: the text to return
-
-        :returns: the text param
-        :rtype: str
         """
         print(self.vars)
-        return text.format(author=self.vars['author'],
-                           channel=self.vars['channel'],
-                           input=self.vars['input'])
+        self.post(text.format(author=self.vars['author'],
+                              channel=self.vars['channel'],
+                              input=self.vars['input']))
 
     def owo(self):
         """
         NYI
         See Sagiri's owo command implementation
-
-        :returns: lowogi
-        :rtype: str
         """
-        return "Nyaat yet impwemented " + LOWOGI
+        self.post("Nyaat yet impwemented " + LOWOGI)
 
     def sigkill(self):
         """
         Send a DC signal to DiscordSenses
-
-        :returns: a dc signal
-        :rtype: str
         """
-        print(self.vars["input"].author.id)
         if self.vars["input"].author.id in ADMINID:
-            return "SIGKILL"
-        return "You can't tell me what to do."
+            self.parent.harmony.sigkill()
+        self.post("You can't tell me what to do.")
 
     def games(self):
         """
         Show some stats based off of a user and a console
-
-        :returns: the command terms if improperly called or a user's console metrics
-        :rtype: str
         """
-        print(self.vars["text"])
         terms = self.vars['text'].split(" ")[1:]
-        print(terms)
         if len(terms) < 2:
-            return "`games` takes a {user} and a {console}"
-        return backdoorgery.getConsoleMetrics(terms[0], terms[1])
+            self.post("`games` takes a {user} and a {console}")
+        self.post(backdoorgery.getConsoleMetrics(terms[0], terms[1]))
 
     def gamecookie(self):
         """
         Show a random game from a user's backloggery
-
-        :returns: a random game or the command syntax
-        :rtype: str
         """
         terms = self.vars['text'].split(" ")[1:]
         if not terms:
-            return "`cookie` takes a {user}"
-        return backdoorgery.getFortuneCookie(terms[0])
+            self.post("`cookie` takes a {user}")
+        self.post(backdoorgery.getFortuneCookie(terms[0]))
 
     def quote(self):
         """
         Fetch a user's quote
-
-        :returns: a quote or an appropriate error
-        :rtype: str
         """
         try:
             quotee = self.vars['text'].split(" ")[1]
         except (KeyError, IndexError):
-            return "No one to quote"
+            self.post("No one to quote")
         with open(QUOTES_FILE, 'r+') as quote_file:
             quotes = json.load(quote_file)
-
         try:
             userquotes = quotes[quotee]
         except KeyError:
-            return "{user} has no registered quotes".format(user=quotee)
-        return random.sample(userquotes, 1)[0]
+            self.post("{user} has no registered quotes".format(user=quotee))
+        self.post(random.sample(userquotes, 1)[0])
 
     def addquote(self):
         """
         Add a quote to a user's quote bank
-
-        :returns: confirmation of receipt
-        :rtype: str
         """
         terms = self.vars["text"].split(" ")
         try:
             quotee = terms[1]
             quote = " ".join(terms[2:])
         except (KeyError, IndexError):
-            return "Woah there son, you aren't even quoting anything."
+            self.post("Woah there son, you aren't even quoting anything.")
         formattedQuote = quote + "\n        - " + quotee
         with open(QUOTES_FILE, 'r+') as quote_file:
             quotes = json.load(quote_file)
@@ -137,16 +115,13 @@ class Actions(object):
         with open(QUOTES_FILE, 'w+') as quote_file:
             quote_file.write(json.dumps(quotes))
 
-        return "I'll remember that."
+        self.post("I'll remember that.")
 
     def madcraft(self, instructs):
         """
         Post instructions on connecting to the MC server
 
         :param str instructs: standard instructions to format
-
-        :returns: instructions formatted with the connection IP
-        :rtype: str
         """
         try:
             ip = None
@@ -155,8 +130,8 @@ class Actions(object):
         except:  #pylint: disable=bare-except
             pass
         if not ip:
-            return "No Madcraft set up in DB"
-        return instructs.format(IP=ip)
+            self.post("No Madcraft set up in DB")
+        self.post(instructs.format(IP=ip))
 
     def aigif(self):
         """
@@ -165,9 +140,6 @@ class Actions(object):
 
         String type return will eventually be deprecated in favor of
         download/clean workflow for cleaner responses
-
-        :returns: Tenor gif URL
-        :rtype: str
         """
         with open(TENOR_FILE, 'r') as secret_file:
             key = json.load(secret_file)['key']
@@ -175,7 +147,7 @@ class Actions(object):
         keywords = " ".join(self.vars["text"].split(" ")[1:])
 
         tenor_san = requests.get(TENOR_URL.format(keyword=keywords, key=key)).json()
-        return tenor_san['results'][0]['url']
+        self.post(tenor_san['results'][0]['url'])
 
     def weeb(self):
         """
@@ -186,14 +158,11 @@ class Actions(object):
 
         String type return will eventually be deprecated in favor of
         download/clean workflow for cleaner responses
-
-        :returns: danbooru image URL
-        :rtype: str
         """
         # Full text but pop the first element which should be the command
         keywords = self.vars["text"].split(" ")
         tags = "+".join(keywords[1:])
-        return _kona(tags) or _booru(tags) or _gel(tags) or "No results " + LUIGIHANDS
+        self.post(_kona(tags) or _booru(tags) or _gel(tags) or "No results " + LUIGIHANDS)
 
     def wiki(self):
         """
@@ -205,9 +174,9 @@ class Actions(object):
         keywords = self.vars["text"].split(" ")
         terms = " ".join(keywords[1:])
         try:
-            return wikipedia.summary(terms)
+            return wikipedia.summary(terms)  # TODO split
         except wikipedia.exceptions.PageError:
-            return "No article found matching the term \"{}\"".format(terms)
+            self.post("No article found matching the term \"{}\"".format(terms))
 
 
 def _kona(tags):
@@ -256,11 +225,3 @@ def _gel(tags):
     if gel_chan:
         return gel_chan[0]['file_url']
     return None
-
-
-
-if __name__ == "__main__":
-    # Doesnt work cause python luigihands
-    A = Actions()
-    A.vars = {"text":".teach Luigi"}
-    print(A.wiki())

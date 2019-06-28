@@ -15,18 +15,14 @@ class Reactor(object):
     """
     def __init__(self, bot):
         self.parent = bot
-        self.body = Actions()
+        self.body = Actions(bot)
 
     def process(self, delta):
         """
         Filter for the incoming text message to parse it along Aigis' lines.
 
         :param str delta: explicit input
-
-        :returns: message to post, if applicable
-        :rtype: str|None
         """
-
         if delta.author.id == AIGISID:
             # Ignore self-driven actions
             return
@@ -50,4 +46,4 @@ class Reactor(object):
                 command = key
 
         if command:
-            return COMMAND_KEYWORDS[command](self.body)
+            COMMAND_KEYWORDS[command](self.body)

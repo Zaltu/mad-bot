@@ -67,4 +67,4 @@ async def memento(discord):
     """
     channel = discord.get_channel(GENERAL)
     text = "Memento Mori"
-    await discord.send_message(channel, text)
+    await channel.send(text)
