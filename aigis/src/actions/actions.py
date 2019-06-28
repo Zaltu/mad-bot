@@ -24,7 +24,7 @@ GEL_URL = "https://gelbooru.com//index.php?page=dapi&s=post&q=index&json=1&pid=1
 
 
 
-class Actions(object):
+class Actions():
     """
     Possible 'actions' the bot may take.
 

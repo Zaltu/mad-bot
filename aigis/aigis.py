@@ -6,7 +6,7 @@ from src.core.reactor import Reactor
 from src.core.harmony import Harmony
 from src.habits.habits import Habits
 
-class Aigis(object):
+class Aigis():
     """
     Aigis
     """

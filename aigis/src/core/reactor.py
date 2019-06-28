@@ -7,7 +7,7 @@ from src.actions.commands import COMMAND_KEYWORDS
 from src.actions.actions import Actions
 from src.consts import AIGISID
 
-class Reactor(object):
+class Reactor():
     """
     Handles bot reactions to server activity
 

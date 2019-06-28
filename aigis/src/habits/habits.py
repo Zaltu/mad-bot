@@ -16,7 +16,7 @@ from apscheduler.triggers.interval import IntervalTrigger as Every
 from src.consts import GENERAL, DBPATH
 
 
-class Habits(object):
+class Habits():
     """
     Defines all repetitive functionality
 
