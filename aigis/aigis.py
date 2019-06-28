@@ -1,7 +1,7 @@
 """
 Main bot control center
 """
-
+from pprint import pprint as pp
 from src.core.reactor import Reactor
 from src.core.harmony import Harmony
 from src.habits.habits import Habits
@@ -27,6 +27,12 @@ class Aigis():
         :returns: any response to the input from the context
         :rtype: obj
         """
+        print("\nAuthor")
+        pp(delta.author.name)
+        print("\nChannel")
+        pp(delta.channel.name)
+        print("\nContent")
+        pp(delta.content)
         self.delta = delta
         return self.mind.process(delta)
 

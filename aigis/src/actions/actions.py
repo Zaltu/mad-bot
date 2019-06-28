@@ -33,7 +33,7 @@ class Actions():
     def __init__(self, bot):
         self.vars = {}
         self.parent = bot
-        self.post = self.parent.harmony.sendMessage
+        self.post = lambda mess : self.parent.harmony.sendMessage(self.vars['channel'], mess)
 
     def text(self, text):
         """
@@ -113,7 +113,7 @@ class Actions():
         else:
             quotes.setdefault(quotee, [formattedQuote])
         with open(QUOTES_FILE, 'w+') as quote_file:
-            quote_file.write(json.dumps(quotes))
+            quote_file.write(json.dumps(quotes, indent=4))
 
         self.post("I'll remember that.")
 
@@ -174,7 +174,7 @@ class Actions():
         keywords = self.vars["text"].split(" ")
         terms = " ".join(keywords[1:])
         try:
-            return wikipedia.summary(terms)  # TODO split
+            self.post(wikipedia.summary(terms))
         except wikipedia.exceptions.PageError:
             self.post("No article found matching the term \"{}\"".format(terms))
 

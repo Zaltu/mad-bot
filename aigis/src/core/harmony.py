@@ -87,9 +87,7 @@ class Harmony(discord.Client):
         :param discord.channel channel: channel to send the message to
         :param str message: message to send
         """
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        loop.run_until_complete(self.aSendMessage(channel, message))
+        asyncio.ensure_future(self.aSendMessage(channel, message))
 
     async def aSendFile(self, channel, file):
         """
