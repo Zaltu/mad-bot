@@ -8,15 +8,15 @@ This repo also contains a functional wrapper around the Python `discord` package
 - simple connect/disconnect
 - simplified callback management
 
-
-## Future
-Aigis will eventually branch out far beyond a simple discord bot, meaning everything here will very likely get largely reorganized and rewritten in the mid-term future. It is unclear whether this will stay a pure discord bot repo, or it will be replaced by something else.
-
-
-# Requirements
+## Requirements
 __Python 3.6 :luigihands:__
 - discord 1.0.1
 - APScheduler 3.6.0
 - pyquery 1.4.0
 - wikipedia 1.4.0
-- zaltu/backdoorgery | master branch (bundled)
+- zaltu/backdoorgery | master branch (vendored)
+
+
+# AIGIS
+This repo also contains the proper configuration to be run with Aigis.  
+Register this repo (or your fork UwU) to activate it.
