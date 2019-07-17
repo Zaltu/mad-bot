@@ -8,7 +8,7 @@ import os
 import requests
 import wikipedia
 
-from src.libs import backdoorgery
+import backdoorgery
 
 from src.consts import ADMINID, DBPATH
 from src.actions.commands import LUIGIHANDS, LOWOGI
