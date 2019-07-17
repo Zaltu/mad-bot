@@ -33,7 +33,7 @@ class Actions():
     def __init__(self, bot):
         self.vars = {}
         self.parent = bot
-        self.post = lambda mess : self.parent.harmony.sendMessage(self.vars['channel'], mess)
+        self.post = lambda mess: self.parent.harmony.sendMessage(self.vars['channel'], mess)
 
     def text(self, text):
         """
