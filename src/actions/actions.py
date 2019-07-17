@@ -167,9 +167,6 @@ class Actions():
     def wiki(self):
         """
         Posts the summary of an article matching the search terms from Wikipedia.
-
-        :returns: article summary
-        :rtype: str
         """
         keywords = self.vars["text"].split(" ")
         terms = " ".join(keywords[1:])
