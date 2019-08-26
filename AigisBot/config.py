@@ -9,3 +9,9 @@ SYSTEM_REQUIREMENTS = ["python3.6", "pip3.6"]
 
 REQUIREMENT_COMMAND = "pip3.6 install -r"
 REQUIREMENT_FILE = "{root}/requirements.txt"
+
+SECRETS = {
+    "discordKey.secret": "{root}/src/db/",
+    "ip.config": "{root}/src/db/",
+    "tenor.secret": "{root}/src/db/"
+}
