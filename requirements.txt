@@ -1,4 +1,4 @@
 discord==1.0.1
 APScheduler==3.6.0
 wikipedia==1.4.0
-git+ssh://git@github.com/zaltu/backdoorgery
+git+https://git@github.com/zaltu/backdoorgery
