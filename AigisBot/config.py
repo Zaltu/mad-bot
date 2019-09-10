@@ -3,7 +3,7 @@ Sample test config for AigisConfig type
 """
 PLUGIN_TYPE = "external"
 ENTRYPOINT = "{root}"
-LAUNCH = ["python36", "src/main.py"]
+LAUNCH = ["python36", "main.py"]
 
 SYSTEM_REQUIREMENTS = ["python36", "pip3.6"]
 
