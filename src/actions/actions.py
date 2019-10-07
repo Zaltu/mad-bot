@@ -8,7 +8,7 @@ import os
 import requests
 import wikipedia
 
-import backdoorgery
+import aigis
 
 from src.consts import ADMINID, DBPATH
 from src.actions.commands import LUIGIHANDS, LOWOGI
@@ -68,7 +68,7 @@ class Actions():
         terms = self.vars['text'].split(" ")[1:]
         if len(terms) < 2:
             self.post("`games` takes a {user} and a {console}")
-        self.post(backdoorgery.getConsoleMetrics(terms[0], terms[1]))
+        self.post(aigis.backloggery.getConsoleMetrics(terms[0], terms[1]))
 
     def gamecookie(self):
         """
@@ -77,7 +77,7 @@ class Actions():
         terms = self.vars['text'].split(" ")[1:]
         if not terms:
             self.post("`cookie` takes a {user}")
-        self.post(backdoorgery.getFortuneCookie(terms[0]))
+        self.post(aigis.backloggery.getFortuneCookie(terms[0]))
 
     def quote(self):
         """
