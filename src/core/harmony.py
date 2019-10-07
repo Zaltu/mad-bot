@@ -3,7 +3,6 @@ Mad bot wrapper around the discord python API
 """
 #pylint: disable=missing-yield-doc,missing-yield-type-doc
 from threading import Thread
-from pprint import pprint as pp
 import os
 import json
 import asyncio
@@ -114,23 +113,13 @@ def discordCreds():
     return key
 
 
-def default_on_message(message):
+def default_on_message(message):  #pylint: disable=unused-argument
     """
-    By default, log all messages recieved.
+    By default, does nothing.
 
     :param discord.message message: the message received
-
-    :returns: empty string because pylint hates None
-    :rtype: evaluates to false
     """
-    print("\nAuthor")
-    pp(message.author.nick)
-    pp(message.author.id)
-    print("\nChannel")
-    pp(message.channel.name)
-    print("\nContent")
-    pp(message.content)
-    return ""
+    return None
 
 
 

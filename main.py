@@ -1,7 +1,8 @@
 """
 Master class of the MAD discord Bot
 """
-from pprint import pprint as pp
+import logging
+
 from src.core.reactor import Reactor
 from src.core.harmony import Harmony
 from src.habits.habits import Habits
@@ -9,8 +10,11 @@ from src.habits.habits import Habits
 class MADBot():
     """
     Container class to hold all of the MAD Bot's functionality classes.
+
+    :param logging.logger logger: a parent logger, optional
     """
-    def __init__(self):
+    def __init__(self, logger=None):
+        self.logger = logger or logging.getLogger("MADBot")
         self.harmony = Harmony(on_message_callback=self.react)
         self.harmony.activate()
         self.mind = Reactor(self)
@@ -25,13 +29,20 @@ class MADBot():
         :returns: any response to the input from the context
         :rtype: obj
         """
-        print("\nAuthor")
-        pp(delta.author.name)
-        print("\nChannel")
-        pp(delta.channel.name)
-        print("\nContent")
+        logtext = """Author:
+        {}
+        Channel:
+        {}
+        Content:
+        {}""".format(delta.author.nick, delta.channel.name, delta.content)
+        self.logger.info(logtext)
         return self.mind.process(delta)
 
 
-if __name__ == "__main__":
-    MADBot()
+def launch(logger):
+    """
+    Launch function as defined by AIGIS conventions.
+
+    :param logging.logger logger: a parent logger provided by AIGIS
+    """
+    MADBot(logger)
