@@ -178,13 +178,10 @@ class Actions():
     def dndspell(self):
         """
         Fetch the description of a spell from D&D 5e
-
-        :returns: The description of the spell requested
-        :rtype: str
         """
         spellname = " ".join(self.vars["text"].split(" ")[1:])
         desc = aigis.dnd.get_spell_desc(spellname)
-        return desc if desc else "No spell found matching \"%s\"" % spellname
+        self.post(desc if desc else "No spell found matching \"%s\"" % spellname)
 
 
 def _kona(tags):
