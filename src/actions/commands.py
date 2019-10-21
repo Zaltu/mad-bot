@@ -212,7 +212,7 @@ HELP = """
 `.quote [user]`: quote a user.
     `.quote @Zaltu`
 `.addquote [user] [text]`: add a quote to a user.
-    `.addquote @Zaltu We still need communism
+    `.addquote @Zaltu We still need communism`
 `.games [user] [console]`: display the user's Backloggery information for a given console.
     `.games zaltu pc`
 `.cookie [user]`: Select a random game from a user's Backloggery.
@@ -226,6 +226,7 @@ HELP = """
 `.fortune`: Display your fortune
 `.edge`: Ow the edge
 `.teach [term]`: School some noobs on a subject
+`.spell [spellname]`: Show the description of a spell from D&D 5e
 `.help`: Display this post
 """
 
@@ -331,6 +332,7 @@ COMMAND_KEYWORDS = {
     ".aigif": lambda body: body.aigif(),
     ".weeb": lambda body: body.weeb(),
     ".teach": lambda body: body.wiki(),
+    ".spell": lambda body: body.dndspell(),
     ".help": lambda body: body.text(HELP),
     "dcpls": lambda body: body.sigkill(),
 }
