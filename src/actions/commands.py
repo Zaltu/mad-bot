@@ -227,6 +227,7 @@ HELP = """
 `.edge`: Ow the edge
 `.teach [term]`: School some noobs on a subject
 `.spell [spellname]`: Show the description of a spell from D&D 5e
+`.translate [language] [text]`: Translate a certain passage into the given language.
 `.help`: Display this post
 """
 
