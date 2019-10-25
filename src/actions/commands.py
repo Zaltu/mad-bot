@@ -175,7 +175,8 @@ COMMANDMENTS = [
     "Frank has the Joker",
     "Do you like\nMy car?",
     "Everybody cheating but Waluigi",
-    "Love Skal, always our pride."
+    "Love Skal, always our pride.",
+    "You just lost the game."
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
@@ -205,7 +206,8 @@ EDGE = [
     "*teleports behind you*\nNothing personnel, kid.",
     "Japanese steel is unbreakble for it has been folded over a thousand times.",
     "In this moment, I am euphoric. Not because of some phony god's blessing, but because I am enlightened by my own intelligence.",
-    "BORN IN A WORLD OF STRIFE\nAGAINST THE ODDS\nWE CHOOSE TO FIGHT\n\nBLOSSOM DANCE"
+    "BORN IN A WORLD OF STRIFE\nAGAINST THE ODDS\nWE CHOOSE TO FIGHT\n\nBLOSSOM DANCE",
+    "Life and death balance on the edge of my blade."
 ]
 
 HELP = """
@@ -307,7 +309,10 @@ COMMAND_KEYWORDS = {
     "mlady": lambda body: body.text("*tips fedora*"),
     "i do not do die": lambda body: body.text("YOU do die!"),
     "captcha": lambda body: body.text("I am *not* a robot! >.<"),
+    "recaptcha": lambda body: body.text("I am *not* a robot! >.<"),
     "pomf": lambda body: body.text("What're we going to do on the bed? OwO"),
+    "angery": lambda body: body.text(PAUL),
+    "dead server": lambda body: body.text("I'm always here though..."),
     AIGIS+" meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
@@ -320,6 +325,7 @@ COMMAND_KEYWORDS = {
     AIGIS+" whats divided by": lambda body: body.text("Twenty-one?"),
     AIGIS+" bitch": lambda body: body.text("no u"),
     AIGIS+" you suck": lambda body: body.text("{author} Jealous? I'm sure there's plenty of dick left for you."),
+    #new_user : POST THE GIIIIIIIIIIIIF (after 10 seconds)
     ".edge": lambda body: body.text(random.sample(EDGE, 1)[0]),
     ".fortune": lambda body: body.text("{author} "+random.sample(PERSONA_QUOTES, 1)[0]),
     ".persona": lambda body: body.text(random.sample(PERSONA_QUOTES, 1)[0]),
