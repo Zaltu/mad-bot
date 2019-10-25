@@ -183,6 +183,18 @@ class Actions():
         desc = aigis.dnd.get_spell_desc(spellname)
         self.post(desc if desc else "No spell found matching \"%s\"" % spellname)
 
+    def translator(self):
+        """
+        Translate some text to a given language.
+        """
+        textlist = self.vars["text"].split(" ")
+        tl = textlist[1]
+        try:
+            translated = aigis.translation.translate(" ".join(textlist[2:]), target_lang=tl)
+        except aigis.translation.BadLanguageError as e:
+            translated = str(e)
+        self.post(translated)
+
 
 def _kona(tags):
     """

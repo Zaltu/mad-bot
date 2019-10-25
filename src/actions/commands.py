@@ -333,6 +333,7 @@ COMMAND_KEYWORDS = {
     ".weeb": lambda body: body.weeb(),
     ".teach": lambda body: body.wiki(),
     ".spell": lambda body: body.dndspell(),
+    ".translate": lambda body: body.translator(),
     ".help": lambda body: body.text(HELP),
     "dcpls": lambda body: body.sigkill(),
 }
