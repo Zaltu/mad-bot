@@ -14,6 +14,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger as Every
 
 from src.consts import GENERAL, DBPATH
+from src.habits.consts import SPECIAL_DAYS
 
 
 class Habits():
@@ -44,6 +45,12 @@ class Habits():
             trigger=Every(days=365, start_date="2019-03-05T08:30:00")
         )
 
+        self.schedule.add_job(
+            special_day,
+            args=[self.discord],
+            trigger=Every(days=1, start_date="")
+        )
+
 
 async def luigifish(discord):
     """
@@ -59,6 +66,7 @@ async def luigifish(discord):
         content=text
     )
 
+
 async def memento(discord):
     """
     Remember your mortality
@@ -68,3 +76,17 @@ async def memento(discord):
     channel = discord.get_channel(GENERAL)
     text = "Memento Mori"
     await channel.send(text)
+
+
+async def special_day(discord):
+    """
+    Wish all a merry Christmas
+
+    :param obj discord: discord connection
+    """
+    channel = discord.get_channel(GENERAL)
+    todayte = datetime.datetime.strftime(datetime.datetime.today(), "%m/%d/")
+    text = SPECIAL_DAYS.get(todayte, None)
+    if text:
+        await channel.send(text)
+
