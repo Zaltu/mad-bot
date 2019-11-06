@@ -3,7 +3,7 @@ Master class of the MAD discord Bot
 """
 import logging
 
-from src.core.reactor import Reactor
+from src.reactor.actions import Reactor
 from src.core.harmony import Harmony
 from src.habits.habits import Habits
 
@@ -16,8 +16,8 @@ class MADBot():
     def __init__(self, logger=None):
         self.logger = logger or logging.getLogger("MADBot")
         self.harmony = Harmony(on_message_callback=self.react)
+        self.reactor = Reactor(self)
         self.harmony.activate()
-        self.mind = Reactor(self)
         self.habits = Habits(self.harmony)
 
     def react(self, delta):
@@ -36,7 +36,7 @@ class MADBot():
         Content:
         {}""".format(delta.author.nick, delta.channel.name, delta.content)
         self.logger.info(logtext)
-        return self.mind.process(delta)
+        return self.reactor.process(delta)
 
 
 def launch(logger):

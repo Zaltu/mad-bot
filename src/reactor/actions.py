@@ -4,14 +4,15 @@ Functions for all possible actions
 import random
 import json
 import os
+import re
 
 import requests
 import wikipedia
 
 import aigis
 
-from src.consts import ADMINID, DBPATH
-from src.actions.commands import LUIGIHANDS, LOWOGI
+from src.consts import AIGISID, ADMINID, DBPATH
+from src.actions.commands import LUIGIHANDS, LOWOGI, COMMAND_KEYWORDS
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
@@ -24,7 +25,7 @@ GEL_URL = "https://gelbooru.com//index.php?page=dapi&s=post&q=index&json=1&pid=1
 
 
 
-class Actions():
+class Reactor():
     """
     Possible 'actions' the bot may take.
 
@@ -34,6 +35,37 @@ class Actions():
         self.vars = {}
         self.parent = bot
         self.post = lambda mess: self.parent.harmony.sendMessage(self.vars['channel'], mess)
+
+    def process(self, delta):
+        """
+        Filter for the incoming text message to parse it along Aigis' lines.
+
+        :param str delta: explicit input
+        """
+        if delta.author.id == AIGISID:
+            # Ignore self-driven actions
+            return
+
+        # Set Body context
+        self.vars = {
+            'text': delta.content,
+            'channel': delta.channel,
+            'author': "<@!%s>" % delta.author.id,
+            'input': delta
+        }
+        words = re.sub("[!#$,':;?]", '', delta.content.lower())
+        words = set(words.split(" "))
+        most = 0
+        command = None
+        for key in COMMAND_KEYWORDS:
+            intNum = len(set(key.split(" ")).intersection(words))
+            if len(key.split(" ")) == intNum and  most < intNum or (most == intNum and \
+                    len(set(key.split(" "))) < len(set(command.split(" "))) if command else 0):
+                most = intNum
+                command = key
+
+        if command:
+            COMMAND_KEYWORDS[command](self)
 
     def text(self, text):
         """
