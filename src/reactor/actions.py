@@ -32,9 +32,9 @@ class Reactor():
     :param Aigis bot: parent bot containing app features.
     """
     def __init__(self, bot):
-        self.vars = {}
+        self.delta = {}
         self.parent = bot
-        self.post = lambda mess: self.parent.harmony.sendMessage(self.vars['channel'], mess)
+        self.post = lambda mess: self.parent.harmony.sendMessage(self.delta['channel'], mess)
 
     def process(self, delta):
         """
@@ -47,7 +47,7 @@ class Reactor():
             return
 
         # Set Body context
-        self.vars = {
+        self.delta = {
             'text': delta.content,
             'channel': delta.channel,
             'author': "<@!%s>" % delta.author.id,
@@ -73,10 +73,9 @@ class Reactor():
 
         :param str text: the text to return
         """
-        print(self.vars)
-        self.post(text.format(author=self.vars['author'],
-                              channel=self.vars['channel'],
-                              input=self.vars['input']))
+        self.post(text.format(author=self.delta['author'],
+                              channel=self.delta['channel'],
+                              input=self.delta['input']))
 
     def owo(self):
         """
@@ -89,7 +88,7 @@ class Reactor():
         """
         Send a DC signal to DiscordSenses
         """
-        if self.vars["input"].author.id in ADMINID:
+        if self.delta["input"].author.id in ADMINID:
             self.parent.harmony.sigkill()
         self.post("You can't tell me what to do.")
 
@@ -97,7 +96,7 @@ class Reactor():
         """
         Show some stats based off of a user and a console
         """
-        terms = self.vars['text'].split(" ")[1:]
+        terms = self.delta['text'].split(" ")[1:]
         if len(terms) < 2:
             self.post("`games` takes a {user} and a {console}")
         self.post(aigis.backloggery.getConsoleMetrics(terms[0], terms[1]))
@@ -106,7 +105,7 @@ class Reactor():
         """
         Show a random game from a user's backloggery
         """
-        terms = self.vars['text'].split(" ")[1:]
+        terms = self.delta['text'].split(" ")[1:]
         if not terms:
             self.post("`cookie` takes a {user}")
         self.post(aigis.backloggery.getFortuneCookie(terms[0]))
@@ -116,7 +115,7 @@ class Reactor():
         Fetch a user's quote
         """
         try:
-            quotee = self.vars['text'].split(" ")[1]
+            quotee = self.delta['text'].split(" ")[1]
         except (KeyError, IndexError):
             self.post("No one to quote")
         with open(QUOTES_FILE, 'r+') as quote_file:
@@ -131,7 +130,7 @@ class Reactor():
         """
         Add a quote to a user's quote bank
         """
-        terms = self.vars["text"].split(" ")
+        terms = self.delta["text"].split(" ")
         try:
             quotee = terms[1]
             quote = " ".join(terms[2:])
@@ -176,7 +175,7 @@ class Reactor():
         with open(TENOR_FILE, 'r') as secret_file:
             key = json.load(secret_file)['key']
         # Full text but pop the first element which should be the command
-        keywords = " ".join(self.vars["text"].split(" ")[1:])
+        keywords = " ".join(self.delta["text"].split(" ")[1:])
 
         tenor_san = requests.get(TENOR_URL.format(keyword=keywords, key=key)).json()
         self.post(tenor_san['results'][0]['url'])
@@ -192,7 +191,7 @@ class Reactor():
         download/clean workflow for cleaner responses
         """
         # Full text but pop the first element which should be the command
-        keywords = self.vars["text"].split(" ")
+        keywords = self.delta["text"].split(" ")
         tags = "+".join(keywords[1:])
         self.post(_kona(tags) or _booru(tags) or _gel(tags) or "No results " + LUIGIHANDS)
 
@@ -200,7 +199,7 @@ class Reactor():
         """
         Posts the summary of an article matching the search terms from Wikipedia.
         """
-        keywords = self.vars["text"].split(" ")
+        keywords = self.delta["text"].split(" ")
         terms = " ".join(keywords[1:])
         try:
             self.post(wikipedia.summary(terms))
@@ -211,7 +210,7 @@ class Reactor():
         """
         Fetch the description of a spell from D&D 5e
         """
-        spellname = " ".join(self.vars["text"].split(" ")[1:])
+        spellname = " ".join(self.delta["text"].split(" ")[1:])
         desc = aigis.dnd.get_spell_desc(spellname)
         self.post(desc if desc else "No spell found matching \"%s\"" % spellname)
 
@@ -219,7 +218,7 @@ class Reactor():
         """
         Translate some text to a given language.
         """
-        textlist = self.vars["text"].split(" ")
+        textlist = self.delta["text"].split(" ")
         tl = textlist[1]
         try:
             translated = aigis.translation.translate(" ".join(textlist[2:]), target_lang=tl)
