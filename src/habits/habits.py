@@ -8,12 +8,13 @@ ANNUALY:
     - memento mori: 08:30
 
 """
+import datetime
 import os
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger as Every
 
-from src.consts import GENERAL, DBPATH
+from src.consts import GENERAL, DBPATH, SPAMMYTESTS
 from src.habits.consts import SPECIAL_DAYS
 
 
@@ -58,13 +59,9 @@ async def luigifish(discord):
 
     :param obj discord: discord connection
     """
-    channel = discord.get_channel(GENERAL)
+    channel = discord.get_channel(SPAMMYTESTS)
     text = "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT"
-    await discord.send_file(
-        destination=channel,
-        fp=os.path.join(DBPATH, "luigifish.png"),
-        content=text
-    )
+    await channel.send(text, file=discord.File(os.path.join(DBPATH, "luigifish.png")))
 
 
 async def memento(discord):
@@ -89,4 +86,3 @@ async def special_day(discord):
     text = SPECIAL_DAYS.get(todayte, None)
     if text:
         await channel.send(text)
-
