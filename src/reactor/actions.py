@@ -218,13 +218,14 @@ class Reactor():
         """
         Translate some text to a given language.
         """
-        textlist = self.delta["text"].split(" ")
-        tl = textlist[1]
-        try:
-            translated = aigis.translation.translate(" ".join(textlist[2:]), target_lang=tl)
-        except aigis.translation.BadLanguageError as e:
-            translated = str(e)
-        self.post(translated)
+        with self.delta['channel'].typing():
+            textlist = self.delta["text"].split(" ")
+            tl = textlist[1]
+            try:
+                translated = aigis.translation.translate(" ".join(textlist[2:]), target_lang=tl)
+            except aigis.translation.BadLanguageError as e:
+                translated = str(e)
+            self.post(translated)
 
 
 def _kona(tags):
