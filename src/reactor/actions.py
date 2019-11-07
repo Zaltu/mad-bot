@@ -48,10 +48,11 @@ class Reactor():
 
         # Set Body context
         self.delta = {
-            'text': delta.content,
+            'text': " ".join(delta.content.split(" ")[1:]),
             'channel': delta.channel,
             'author': "<@!%s>" % delta.author.id,
-            'input': delta
+            'input': delta,
+            'command': delta.content.split(" ")[0]
         }
         words = re.sub("[!#$,':;?]", '', delta.content.lower())
         words = set(words.split(" "))
@@ -96,7 +97,7 @@ class Reactor():
         """
         Show some stats based off of a user and a console
         """
-        terms = self.delta['text'].split(" ")[1:]
+        terms = self.delta['text'].split(" ")
         if len(terms) < 2:
             self.post("`games` takes a {user} and a {console}")
         self.post(aigis.backloggery.getConsoleMetrics(terms[0], terms[1]))
@@ -105,7 +106,7 @@ class Reactor():
         """
         Show a random game from a user's backloggery
         """
-        terms = self.delta['text'].split(" ")[1:]
+        terms = self.delta['text'].split(" ")
         if not terms:
             self.post("`cookie` takes a {user}")
         self.post(aigis.backloggery.getFortuneCookie(terms[0]))
@@ -115,7 +116,7 @@ class Reactor():
         Fetch a user's quote
         """
         try:
-            quotee = self.delta['text'].split(" ")[1]
+            quotee = self.delta['text']
         except (KeyError, IndexError):
             self.post("No one to quote")
         with open(QUOTES_FILE, 'r+') as quote_file:
@@ -132,8 +133,8 @@ class Reactor():
         """
         terms = self.delta["text"].split(" ")
         try:
-            quotee = terms[1]
-            quote = " ".join(terms[2:])
+            quotee = terms[0]
+            quote = " ".join(terms[1:])
         except (KeyError, IndexError):
             self.post("Woah there son, you aren't even quoting anything.")
         formattedQuote = quote + "\n        - " + quotee
@@ -175,7 +176,7 @@ class Reactor():
         with open(TENOR_FILE, 'r') as secret_file:
             key = json.load(secret_file)['key']
         # Full text but pop the first element which should be the command
-        keywords = " ".join(self.delta["text"].split(" ")[1:])
+        keywords = self.delta["text"]
 
         tenor_san = requests.get(TENOR_URL.format(keyword=keywords, key=key)).json()
         self.post(tenor_san['results'][0]['url'])
@@ -191,8 +192,7 @@ class Reactor():
         download/clean workflow for cleaner responses
         """
         # Full text but pop the first element which should be the command
-        keywords = self.delta["text"].split(" ")
-        tags = "+".join(keywords[1:])
+        tags = "+".join(self.delta["text"].split(" "))
         self.post(_kona(tags) or _booru(tags) or _gel(tags) or "No results " + LUIGIHANDS)
 
     def wiki(self):
@@ -200,7 +200,7 @@ class Reactor():
         Posts the summary of an article matching the search terms from Wikipedia.
         """
         keywords = self.delta["text"].split(" ")
-        terms = " ".join(keywords[1:])
+        terms = " ".join(keywords)
         try:
             self.post(wikipedia.summary(terms))
         except wikipedia.exceptions.PageError:
@@ -210,7 +210,7 @@ class Reactor():
         """
         Fetch the description of a spell from D&D 5e
         """
-        spellname = " ".join(self.delta["text"].split(" ")[1:])
+        spellname = self.delta["text"]
         desc = aigis.dnd.get_spell_desc(spellname)
         self.post(desc if desc else "No spell found matching \"%s\"" % spellname)
 
@@ -220,9 +220,9 @@ class Reactor():
         """
         with self.delta['channel'].typing():
             textlist = self.delta["text"].split(" ")
-            tl = textlist[1]
+            tl = textlist[0]
             try:
-                translated = aigis.translation.translate(" ".join(textlist[2:]), target_lang=tl)
+                translated = aigis.translation.translate(" ".join(textlist[1:]), target_lang=tl)
             except aigis.translation.BadLanguageError as e:
                 translated = str(e)
             self.post(translated)
