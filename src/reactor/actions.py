@@ -8,6 +8,7 @@ import re
 
 import requests
 import wikipedia
+import youtube_dl
 
 import aigis
 
@@ -35,26 +36,27 @@ class Reactor():
         self.delta = {}
         self.parent = bot
         self.post = lambda mess: self.parent.harmony.sendMessage(self.delta['channel'], mess)
+        self.postfile = lambda mess, afile: self.parent.harmony.sendFile(self.delta['channel'], mess, afile)
 
-    def process(self, delta):
+    def process(self, full_delta):
         """
         Filter for the incoming text message to parse it along Aigis' lines.
 
-        :param str delta: explicit input
+        :param str full_delta: explicit input
         """
-        if delta.author.id == AIGISID:
+        if full_delta.author.id == AIGISID:
             # Ignore self-driven actions
             return
 
         # Set Body context
         self.delta = {
-            'text': " ".join(delta.content.split(" ")[1:]),
-            'channel': delta.channel,
-            'author': "<@!%s>" % delta.author.id,
-            'input': delta,
-            'command': delta.content.split(" ")[0]
+            'text': " ".join(full_delta.content.split(" ")[1:]),
+            'channel': full_delta.channel,
+            'author': "<@!%s>" % full_delta.author.id,
+            'input': full_delta,
+            'command': full_delta.content.split(" ")[0]
         }
-        words = re.sub("[!#$,':;?]", '', delta.content.lower())
+        words = re.sub("[!#$,':;?]", '', full_delta.content.lower())
         words = set(words.split(" "))
         most = 0
         command = None
@@ -226,6 +228,30 @@ class Reactor():
             except aigis.translation.BadLanguageError as e:
                 translated = str(e)
             self.post(translated)
+
+    def getaudio(self):
+        """
+        Download an audio file and upload it to the channel.
+        Basically, used to rip audio files.
+        """
+        filepath = os.join(DBPATH, 'ytdl-out', '%{title}s')
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'outtmpl': filepath,
+            'max_filesize': "1g",  # 1GB, not lg
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3'
+            }],
+            'logger': self.parent.logger
+        }
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([self.delta['text']])
+        self.postfile("Here you go!", filepath)
+        # Cleanup so we don't have shit hanging around forever
+        os.remove(filepath)
+
+
 
 
 def _kona(tags):
