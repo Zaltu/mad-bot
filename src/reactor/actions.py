@@ -253,7 +253,7 @@ class Reactor():
                 self.parent.logger.error(str(e))
                 self.post("Unexpected error occured, sorry...")
                 return
-        fp = glob.glob(os.path.dirname(filepath))[0]  # There's only one I hope
+        fp = glob.glob(os.path.join(DBPATH, 'ytdl-out', '*'))[0]  # There's only one I hope
         self.postfile("Here you go!", fp)
         # Cleanup so we don't have shit hanging around forever
         os.remove(fp)
