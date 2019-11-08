@@ -253,10 +253,10 @@ class Reactor():
                 self.parent.logger.error(str(e))
                 self.post("Unexpected error occured, sorry...")
                 return
-        self.postfile("Here you go!", filepath)
+        fp = glob.glob(os.path.dirname(filepath))[0]  # There's only one I hope
+        self.postfile("Here you go!", fp)
         # Cleanup so we don't have shit hanging around forever
-        files = glob.glob(os.path.dirname(filepath))
-        os.remove(files[0])  # There's only one
+        os.remove(fp)
 
 
 
