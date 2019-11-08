@@ -3,6 +3,7 @@ Functions for all possible actions
 """
 import random
 import json
+import glob
 import os
 import re
 
@@ -254,7 +255,8 @@ class Reactor():
                 return
         self.postfile("Here you go!", filepath)
         # Cleanup so we don't have shit hanging around forever
-        os.remove(filepath)
+        files = glob.glob(os.path.dirname(filepath))
+        os.remove(files[0])  # There's only one
 
 
 

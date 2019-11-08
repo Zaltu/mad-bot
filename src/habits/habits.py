@@ -11,6 +11,7 @@ ANNUALY:
 import datetime
 import os
 
+import discord
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger as Every
 
@@ -22,10 +23,10 @@ class Habits():
     """
     Defines all repetitive functionality
 
-    :param DiscordSenses discord: the discord connection
+    :param harmonySenses harmony: the harmony connection
     """
-    def __init__(self, discord):
-        self.discord = discord
+    def __init__(self, harmony):
+        self.harmony = harmony
         self.schedule = AsyncIOScheduler()
         self.schedule.start()
         self.populateScheduler()
@@ -36,52 +37,52 @@ class Habits():
         """
         self.schedule.add_job(
             luigifish,
-            args=[self.discord],
+            args=[self.harmony],
             trigger=Every(days=1, start_date="2019-01-01T20:30:00")
         )
 
         self.schedule.add_job(
             memento,
-            args=[self.discord],
+            args=[self.harmony],
             trigger=Every(days=365, start_date="2019-03-05T08:30:00")
         )
 
         self.schedule.add_job(
             special_day,
-            args=[self.discord],
+            args=[self.harmony],
             trigger=Every(days=1, start_date="")
         )
 
 
-async def luigifish(discord):
+async def luigifish(harmony):
     """
     Post luigifish
 
-    :param obj discord: discord connection
+    :param obj harmony: harmony connection
     """
-    channel = discord.get_channel(SPAMMYTESTS)
+    channel = harmony.get_channel(SPAMMYTESTS)
     text = "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT"
     await channel.send(text, file=discord.File(os.path.join(DBPATH, "luigifish.png")))
 
 
-async def memento(discord):
+async def memento(harmony):
     """
     Remember your mortality
 
-    :param obj discord: discord connection
+    :param obj harmony: harmony connection
     """
-    channel = discord.get_channel(GENERAL)
+    channel = harmony.get_channel(GENERAL)
     text = "Memento Mori"
     await channel.send(text)
 
 
-async def special_day(discord):
+async def special_day(harmony):
     """
     Wish all a merry Christmas
 
-    :param obj discord: discord connection
+    :param obj harmony: harmony connection
     """
-    channel = discord.get_channel(GENERAL)
+    channel = harmony.get_channel(GENERAL)
     todayte = datetime.datetime.strftime(datetime.datetime.today(), "%m/%d/")
     text = SPECIAL_DAYS.get(todayte, None)
     if text:
