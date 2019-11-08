@@ -234,7 +234,7 @@ class Reactor():
         Download an audio file and upload it to the channel.
         Basically, used to rip audio files.
         """
-        filepath = os.path.join(DBPATH, 'ytdl-out', '%{title}s')
+        filepath = os.path.join(DBPATH, 'ytdl-out', '%(title)s')
         ydl_opts = {
             'format': 'bestaudio/best',
             'outtmpl': filepath,
@@ -246,7 +246,12 @@ class Reactor():
             'logger': self.parent.logger
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([self.delta['text']])
+            try:
+                ydl.download([self.delta['text']])
+            except youtube_dl.utils.DownloadError as e:
+                self.parent.logger.error(str(e))
+                self.post("Unexpected error occured, sorry...")
+                return
         self.postfile("Here you go!", filepath)
         # Cleanup so we don't have shit hanging around forever
         os.remove(filepath)
