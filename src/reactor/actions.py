@@ -234,7 +234,7 @@ class Reactor():
         Download an audio file and upload it to the channel.
         Basically, used to rip audio files.
         """
-        filepath = os.join(DBPATH, 'ytdl-out', '%{title}s')
+        filepath = os.path.join(DBPATH, 'ytdl-out', '%{title}s')
         ydl_opts = {
             'format': 'bestaudio/best',
             'outtmpl': filepath,
