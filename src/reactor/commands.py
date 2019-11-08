@@ -341,6 +341,7 @@ COMMAND_KEYWORDS = {
     ".teach": lambda body: body.wiki(),
     ".spell": lambda body: body.dndspell(),
     ".translate": lambda body: body.translator(),
+    ".ripaudio": lambda body: body.getaudio(),
     ".help": lambda body: body.text(HELP),
     "dcpls": lambda body: body.sigkill(),
 }
