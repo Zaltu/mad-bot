@@ -13,7 +13,7 @@ import youtube_dl
 import aigis
 
 from src.consts import AIGISID, ADMINID, DBPATH
-from src.actions.commands import LUIGIHANDS, LOWOGI, COMMAND_KEYWORDS
+from src.reactor.commands import LUIGIHANDS, LOWOGI, COMMAND_KEYWORDS
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
