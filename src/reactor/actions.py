@@ -238,7 +238,7 @@ class Reactor():
         ydl_opts = {
             'format': 'bestaudio/best',
             'outtmpl': filepath,
-            'max_filesize': "1g",  # 1GB, not lg
+            'max_filesize': 1073741824,  # 1GB, not lg
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3'
