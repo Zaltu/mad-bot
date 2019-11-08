@@ -254,9 +254,14 @@ class Reactor():
                 self.post("Unexpected error occured, sorry...")
                 return
         fp = glob.glob(os.path.join(DBPATH, 'ytdl-out', '*'))[0]  # There's only one I hope
-        self.postfile("Here you go!", fp)
-        # Cleanup so we don't have shit hanging around forever
-        os.remove(fp)
+        def wrapper():
+            """
+            Make sure the deletion of the temp file happens after the file is sent...
+            """
+            self.parent.harmony.aSendFile(self.delta['channel'], "Here you go!", fp)
+            # Cleanup so we don't have shit hanging around forever
+            os.remove(fp)
+        asyncio.ensure_future(wrapper())
 
 
 

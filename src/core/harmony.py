@@ -103,7 +103,7 @@ class Harmony(discord.Client):
         :param str text: message to send
         :param str afile: path to file to upload
         """
-        self.loop.run_until_complete(self.aSendFile(channel, text, afile))
+        asyncio.ensure_future(self.aSendFile(channel, text, afile))
 
 
     def sigkill(self):
