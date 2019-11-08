@@ -259,7 +259,7 @@ class Reactor():
             """
             Make sure the deletion of the temp file happens after the file is sent...
             """
-            self.parent.harmony.aSendFile(self.delta['channel'], "Here you go!", fp)
+            await self.parent.harmony.aSendFile(self.delta['channel'], "Here you go!", fp)
             # Cleanup so we don't have shit hanging around forever
             os.remove(fp)
         asyncio.ensure_future(wrapper())
