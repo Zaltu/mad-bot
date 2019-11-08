@@ -255,7 +255,7 @@ class Reactor():
                 self.post("Unexpected error occured, sorry...")
                 return
         fp = glob.glob(os.path.join(DBPATH, 'ytdl-out', '*'))[0]  # There's only one I hope
-        def wrapper():
+        async def wrapper():
             """
             Make sure the deletion of the temp file happens after the file is sent...
             """
