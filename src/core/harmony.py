@@ -92,7 +92,7 @@ class Harmony(discord.Client):
         """
         Upload file to given channel
         """
-        channel.send(text, file=discord.File(afile))
+        await channel.send(text, file=discord.File(afile))
 
     def sendFile(self, channel, text, afile):
         """
