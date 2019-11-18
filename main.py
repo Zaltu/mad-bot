@@ -39,10 +39,8 @@ class MADBot():
         return self.reactor.process(delta)
 
 
-def launch(logger):
+def launch():
     """
     Launch function as defined by AIGIS conventions.
-
-    :param logging.logger logger: a parent logger provided by AIGIS
     """
-    MADBot(logger)
+    MADBot()
