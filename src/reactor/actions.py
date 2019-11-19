@@ -70,6 +70,7 @@ class Reactor():
                 command = key
 
         if command:
+            self.parent.logger.info("Responding to command: %s", command)
             COMMAND_KEYWORDS[command](self)
 
     def text(self, text):

@@ -10,11 +10,10 @@ from src.habits.habits import Habits
 class MADBot():
     """
     Container class to hold all of the MAD Bot's functionality classes.
-
-    :param logging.logger logger: a parent logger, optional
     """
-    def __init__(self, logger=None):
-        self.logger = logger or logging.getLogger("MADBot")
+    def __init__(self):
+        self.logger = logging.getLogger("MADBot")
+        self.logger.setLevel(logging.INFO)
         self.harmony = Harmony(on_message_callback=self.react)
         self.reactor = Reactor(self)
         self.harmony.activate()
@@ -35,7 +34,7 @@ class MADBot():
         {}
         Content:
         {}""".format(delta.author.nick, delta.channel.name, delta.content)
-        self.logger.info(logtext)
+        self.logger.debug(logtext)
         return self.reactor.process(delta)
 
 
