@@ -33,7 +33,7 @@ class MADBot():
         Channel:
         {}
         Content:
-        {}""".format(delta.author.nick, delta.channel.name, delta.content)
+        {}""".format(getattr(delta.author, "nick", delta.author.name), delta.channel.name, delta.content)
         self.logger.debug(logtext)
         return self.reactor.process(delta)
 
