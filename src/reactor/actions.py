@@ -278,7 +278,13 @@ class Reactor():
             self.post("No generator exists for %s" % requestAttr)
             return
 
-
+    def furi(self):
+        """
+        Convert japanese text to furigana (for educational purposes).
+        """
+        self.post(
+            aigis.translate.japanese.to_furigana(self.delta["text"])
+        )
 
 
 def _kona(tags):
