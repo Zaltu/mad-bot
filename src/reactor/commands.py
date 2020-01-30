@@ -316,6 +316,7 @@ COMMAND_KEYWORDS = {
     "potion seller": lambda body: body.text("My potions are TOO STRONG FOR YOU TRAVELLER! YOU SHOULD FIND A SELLER\nTHAT SELLS\nWeAkEr\nPoTiOnS!"),
     "haha": lambda body: body.text(">haha"),
     "what happened was": lambda body: body.text("Haha, great story {author}. Anyway, how is your sex life?"),
+    "hello there": lambda body: body.text("GENERAL KENOBI!\nOnly you would be so bold."),
     AIGIS+" meaning life": lambda body: body.text("42 of course"),
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
@@ -345,6 +346,7 @@ COMMAND_KEYWORDS = {
     ".spell": lambda body: body.dndspell(),
     ".translate": lambda body: body.translator(),
     ".ripaudio": lambda body: body.getaudio(),
+    ".generate": lambda body: body.genesis(),
     ".help": lambda body: body.text(HELP),
     "dcpls": lambda body: body.sigkill(),
 }

@@ -265,6 +265,19 @@ class Reactor():
             os.remove(fp)
         asyncio.ensure_future(wrapper())
 
+    def genesis(self):
+        """
+        Generate stuff using AIGIS.generate.
+        """
+        requestAttr = self.delta["text"].split(" ")[0]
+        try:
+            generator = getattr(aigis.generate, requestAttr)
+            self.post(generator())
+        except AttributeError:
+            # No valid genesis for this attr
+            self.post("No generator exists for %s" % requestAttr)
+            return
+
 
 
 
