@@ -283,7 +283,7 @@ class Reactor():
         Convert japanese text to furigana (for educational purposes).
         """
         self.post(
-            aigis.japanese().to_furigana(self.delta["text"])
+            aigis.japanese(self.delta["text"]).furigana
         )
 
 
