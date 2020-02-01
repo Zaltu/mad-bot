@@ -149,10 +149,19 @@ ANIME = [
     "KissXSis OwO"
 ]
 PERSONA_QUOTES = [
+    "Attaining one's dream requires a stern will and unfailing determination.",
+    "The silent voice within one's heart whispers the most profound wisdom.",
     "Celebrate life's grandeur. Its brilliance. Its magnificence.",
+    "Only courage in the face of doubt can lead one to the answer...",
+    "It is indeed a precious gift to understand the forces that guide oneself...",
     "There is both joy and wonder in coming to understand another.",
-    "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits.",
-    "It requires great courage to look at oneself honestly, and forge one's own path."
+    "One of life's greatest blessings is the freedom to pursue one's goals.",
+    "To find the one true path, one must seek guidance amidst uncertainty...",
+    "It requires great courage to look at oneself honestly, and forge one's own path.",
+    "Alongside time exists fate, the bearer of cruelty.",
+    "Only with strength can one endure suffering and torment.",
+    "In the face of disaster lies opportunity for renewal.",
+    "Beyond the beaten path lies the absolute end. It matters not who you are, death awaits."
 ]
 COMMANDMENTS = [
     "Traps are gay.",
