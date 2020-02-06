@@ -147,7 +147,7 @@ def _chunksToMaxChars(message):
     :yieldtype: str
     """
     # Most messages should be under the limit, let's be at least a little efficient here...
-    if len(message) < MAX_LENGTH_MESSAGE:
+    if len(str(message)) < MAX_LENGTH_MESSAGE:
         yield message
         return
     splitstr = message.split(" ")
