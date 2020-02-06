@@ -284,7 +284,7 @@ class Reactor():
         Convert japanese text to furigana (for educational purposes).
         """
         self.post(
-            aigis.japanese(self.delta["text"]).furigana
+            aigis.japanese.to_furigana(self.delta["text"])
         )
 
     def minesweeper(self):
