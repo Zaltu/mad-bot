@@ -348,6 +348,7 @@ COMMAND_KEYWORDS = {
     ".ripaudio": lambda body: body.getaudio(),
     ".generate": lambda body: body.genesis(),
     ".furi": lambda body: body.furi(),
+    ".minesweeper": lambda body: body.minesweeper(),
     ".help": lambda body: body.text(HELP),
     "dcpls": lambda body: body.sigkill(),
 }

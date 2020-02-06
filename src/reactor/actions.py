@@ -16,6 +16,7 @@ import aigis
 
 from src.consts import AIGISID, ADMINID, DBPATH
 from src.reactor.commands import LUIGIHANDS, LOWOGI, COMMAND_KEYWORDS
+import minesweeper
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
@@ -284,6 +285,18 @@ class Reactor():
         """
         self.post(
             aigis.japanese(self.delta["text"]).furigana
+        )
+
+    def minesweeper(self):
+        """
+        Let's play some minesweeper comrades!
+        """
+        try:
+            dim = int(self.delta["text"])
+        except (ValueError, TypeError):
+            dim = 5
+        self.post(
+            minesweeper.getMineField(dim, dim)
         )
 
 
