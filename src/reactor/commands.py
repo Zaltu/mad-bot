@@ -239,6 +239,12 @@ HELP = """
 `.teach [term]`: School some noobs on a subject
 `.spell [spellname]`: Show the description of a spell from D&D 5e
 `.translate [language] [text]`: Translate a certain passage into the given language.
+`.generate [thing]: generate a random thing, if possible.`
+    `.generate name`
+`.minesweeper [optional size]: Create a minesweeper game of a certain dimension. Default 5.`
+`.furi [text]: generate the furigana of a chunk of japanese text.`
+`.ripaudio [youtube_id]: rip and post the MP3 of a youtube video under 2GB.`
+    `.ripaudio gVEdQJ7qtJw`
 `.help`: Display this post
 """
 
@@ -305,6 +311,7 @@ COMMAND_KEYWORDS = {
     "not like i want": lambda body: body.text("B-B-BAKA!!"),
     "thot": lambda body: body.text("BEGONE, THOT!"),
     "im the trashman": lambda body: body.text("I GET OUT THERE\nAND I START EATING GARBAGE"),
+    "ashe": lambda body: body.text("I'M AN ASHE MAIN\nI GET OUT THERE\nAND I THROW DYNAMITE ALL OVER THE POINT\nAND THEN\nI START EATING GARBAGE"),
     "really makes think": lambda body: body.text("Gives you the big think, even."),
     "gg": lambda body: body.text("ez"),
     "bingo bang": lambda body: body.text("The name's McCree."),
@@ -359,5 +366,6 @@ COMMAND_KEYWORDS = {
     ".furi": lambda body: body.furi(),
     ".minesweeper": lambda body: body.minesweeper(),
     ".help": lambda body: body.text(HELP),
+    "rlpls": lambda body: body.sigkill(),
     "dcpls": lambda body: body.sigkill(),
 }
