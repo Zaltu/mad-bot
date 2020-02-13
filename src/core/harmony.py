@@ -88,26 +88,26 @@ class Harmony(discord.Client):
         """
         asyncio.ensure_future(self.aSendMessage(channel, message))
 
-    async def aSendFile(self, channel, text, afile):
+    async def aSendFile(self, channel, afile, text):
         """
         Upload file to given channel
 
         :param discord.channel channel: channel to send the message to
-        :param str text: message to send
         :param str afile: path to file to upload
+        :param str text: message to send
         """
         await channel.send(text, file=discord.File(afile))
 
-    def sendFile(self, channel, text, afile):
+    def sendFile(self, channel, afile, text=""):
         """
         Non-async wrapper for uploading a file to a channel.
         Call is still made in async, but the event loop wrapper is handled for you.
 
         :param discord.channel channel: channel to send the message to
-        :param str text: message to send
         :param str afile: path to file to upload
+        :param str text: message to send
         """
-        asyncio.ensure_future(self.aSendFile(channel, text, afile))
+        asyncio.ensure_future(self.aSendFile(channel, afile, text))
 
 
     def sigkill(self):
