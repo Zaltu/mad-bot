@@ -273,7 +273,11 @@ class Reactor():
         requestAttr = self.delta["text"].split(" ")[0]
         try:
             generator = getattr(aigis.generate, requestAttr)
-            self.post(generator())
+            created = generator()
+            if os.path.exists(created):
+                self.parent.harmony.sendFile(self.delta["channel"], created)
+            else:
+                self.post(created)
         except AttributeError:
             # No valid genesis for this attr
             self.post("No generator exists for %s" % requestAttr)

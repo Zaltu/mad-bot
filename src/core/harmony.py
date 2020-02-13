@@ -91,6 +91,10 @@ class Harmony(discord.Client):
     async def aSendFile(self, channel, text, afile):
         """
         Upload file to given channel
+
+        :param discord.channel channel: channel to send the message to
+        :param str text: message to send
+        :param str afile: path to file to upload
         """
         await channel.send(text, file=discord.File(afile))
 
