@@ -271,9 +271,10 @@ class Reactor():
         Generate stuff using AIGIS.generate.
         """
         requestAttr = self.delta["text"].split(" ")[0]
+        kwargs = _genesis_args(self.delta["text"].split(" ")[1:])
         try:
             generator = getattr(aigis.generate, requestAttr)
-            created = generator()
+            created = generator(**kwargs)
             if os.path.exists(created):
                 self.parent.harmony.sendFile(self.delta["channel"], created)
             else:
@@ -281,7 +282,8 @@ class Reactor():
         except AttributeError:
             # No valid genesis for this attr
             self.post("No generator exists for %s" % requestAttr)
-            return
+        except TypeError:
+            self.post("Unrecognized argument in\n%s" % kwargs)
 
     def furi(self):
         """
@@ -350,3 +352,21 @@ def _gel(tags):
     if gel_chan:
         return gel_chan[0]['file_url']
     return None
+
+def _genesis_args(args):
+    """
+    Split potential genesis args into an actual key dict
+
+    :param list args: list of received arguments
+
+    :returns: k-v paired arguments
+    :rtype: dict
+    """
+    res = {}
+    try:
+        for arg in args:
+            kv = arg.split("=")
+            res[kv[0]] = kv[1]
+    except Exception:  #pylint: disable=broad-except
+        return {}
+    return res
