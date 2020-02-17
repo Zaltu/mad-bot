@@ -366,6 +366,10 @@ def _genesis_args(args):
     try:
         for arg in args:
             kv = arg.split("=")
+            try:
+                kv[1] = int(kv[1])
+            except ValueError:
+                pass
             res[kv[0]] = kv[1]
     except Exception:  #pylint: disable=broad-except
         return {}
