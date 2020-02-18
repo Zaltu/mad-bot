@@ -13,7 +13,7 @@ class MADBot():
     """
     def __init__(self):
         self.logger = logging.getLogger("MADBot")
-        self.logger.setLevel(logging.INFO)
+        #self.logger.setLevel(logging.INFO)
         self.harmony = Harmony(on_message_callback=self.react)
         self.reactor = Reactor(self)
         self.harmony.activate()
@@ -28,6 +28,7 @@ class MADBot():
         :returns: any response to the input from the context
         :rtype: obj
         """
+        print(delta.channel.id)
         logtext = """Author:
         {}
         Channel:

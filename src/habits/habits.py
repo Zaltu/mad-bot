@@ -42,15 +42,9 @@ class Habits():
         )
 
         self.schedule.add_job(
-            memento,
-            args=[self.harmony],
-            trigger=Every(days=365, start_date="2019-03-05T08:30:00")
-        )
-
-        self.schedule.add_job(
             special_day,
             args=[self.harmony],
-            trigger=Every(days=1, start_date="")
+            trigger=Every(days=1, start_date="2020-01-01T00:00:00")
         )
 
 
@@ -63,18 +57,6 @@ async def luigifish(harmony):
     channel = harmony.get_channel(SPAMMYTESTS)
     text = "I AM GOING TO POST THIS LUIGI EVERY DAY UNTIL YOU LIKE IT"
     await channel.send(text, file=discord.File(os.path.join(DBPATH, "luigifish.png")))
-
-
-async def memento(harmony):
-    """
-    Remember your mortality
-
-    :param obj harmony: harmony connection
-    """
-    channel = harmony.get_channel(GENERAL)
-    text = "Memento Mori"
-    await channel.send(text)
-
 
 async def special_day(harmony):
     """
