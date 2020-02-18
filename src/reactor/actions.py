@@ -257,14 +257,7 @@ class Reactor():
                 self.post("Unexpected error occured, sorry...")
                 return
         fp = glob.glob(os.path.join(DBPATH, 'ytdl-out', '*'))[0]  # There's only one I hope
-        async def wrapper():
-            """
-            Make sure the deletion of the temp file happens after the file is sent...
-            """
-            await self.parent.harmony.aSendFile(self.delta['channel'], fp, "Here you go!")
-            # Cleanup so we don't have shit hanging around forever
-            os.remove(fp)
-        asyncio.ensure_future(wrapper())
+        self._clean_async_file_upload(fp)
 
     def genesis(self):
         """
@@ -274,15 +267,16 @@ class Reactor():
         kwargs = _genesis_args(self.delta["text"].split(" ")[1:])
         try:
             generator = getattr(aigis.generate, requestAttr)
-            created = generator(**kwargs)
-            if os.path.exists(created):
-                self.parent.harmony.sendFile(self.delta["channel"], created)
-            else:
-                self.post(created)
         except AttributeError:
             # No valid genesis for this attr
             self.post("No generator exists for %s" % requestAttr)
-        except TypeError:
+        try:
+            created = generator(**kwargs)
+            if os.path.exists(created):
+                self._clean_async_file_upload(created)
+            else:
+                self.post(created)
+        except (TypeError, KeyError):
             self.post("Unrecognized argument in\n%s" % kwargs)
 
     def furi(self):
@@ -305,6 +299,15 @@ class Reactor():
             minesweeper.getMineField(dim, dim)
         )
 
+    def _clean_async_file_upload(self, fp, text="Here you go!"):
+        async def wrapper():
+            """
+            Make sure the deletion of the temp file happens after the file is sent...
+            """
+            await self.parent.harmony.aSendFile(self.delta['channel'], fp, text)
+            # Cleanup so we don't have shit hanging around forever
+            os.remove(fp)
+        asyncio.ensure_future(wrapper())
 
 def _kona(tags):
     """
