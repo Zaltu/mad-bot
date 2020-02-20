@@ -437,6 +437,7 @@ COMMAND_KEYWORDS = {
     "angery": lambda body: body.text(PAUL),
     "dead server": lambda body: body.text("I'm always here though..."),
     "potion seller": lambda body: body.text("My potions are TOO STRONG FOR YOU TRAVELLER! YOU SHOULD FIND A SELLER\nTHAT SELLS\nWeAkEr\nPoTiOnS!"),
+    "cant handle strongest potions": lambda body: body.text("Potion sellet, enough of these games..."),
     "haha": lambda body: body.text(">haha"),
     "what happened was": lambda body: body.text("Haha, great story {author}. Anyway, how is your sex life?"),
     "hello there": lambda body: body.text("GENERAL KENOBI!\nOnly you would be so bold."),
