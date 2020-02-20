@@ -92,6 +92,113 @@ DURING SHOWER TIME ESPECIALLY
 AND ALL THE INMATES LOVE MEEEEEEE
 PLEASE GET ME OUT SOON MOMMY ( ;_;)
 """
+OW_SONG = """
+SOMEBODY ONCE TOLD ME
+THE PAYLOAD WASN'T MOVING
+I AIN'T THE SHARPEST TOOL IN THE SHED
+
+SHE WAS LOOKING KIND OF DUMB
+WITH HER TWIN MACHINE GUNS
+AND HER BIG GOGGLES ON HER FOREHEAD
+
+WELL
+
+THE HOOKS START COMING AND THEY DON'T STOP COMING
+YA GET HAMMER DOWN AND YA HIT THE GROUND, STUNNIN'
+DIDN'T MAKE SENSE NOT TO PLAY FOR FUN
+YOUR RANK GOES UP BUT IT'S KIND OF DUMB
+
+SO MUCH TO DO
+SO MUCH TO SEE
+SO WHAT WRONG WITH TORB WHILE ATTACKING
+
+YOU'LL NEVER KNOW IF YOU DON'T GO
+SR ONLY GETS SO LOW
+
+HEY NOW
+YOU'RE A TRA-STAR
+GET YOUR PUSLE BOMB
+GO PLAY
+
+HEY NOW
+YOU'RE A REINHARTD
+KEEP YOUR SHIELD UP
+MAKE PLAYS
+
+AND ALL MY WEAPONS ARE GOLD
+ONLY LUCIO GETS
+NANO'ED
+
+IT'S A LOW RANK
+AND THEY SAY IT GETS LOWER
+YOU'RE TILTED NOW WAIT 'TILL YA HIT SILVER
+
+BUT THE TOP 500 BET TO DIFFER
+JUDGING BY THE GAP IN THE SKILL RANK LADDER
+
+THE TEAM'S HP
+IS GETTING PRETTY THIN
+NEW THEY'RE ALL DEAD SO YOU MIGHT AS WELL SPIN
+
+MY PORTRAIT'S ON FIRE
+HOW ABOUT YOURS?
+THAT'S THE WAY I LIKE IT AND I'LL NEVER GET BORED
+
+HEY NOW
+YOU'RE A TRA-STAR
+JEFF PLEASE
+NERF MCCREE
+
+HEY NOW
+YOU'RE A MERCY
+STOP RUNNING
+AWAY FROM ME
+
+AND ALL MY WEAPONS ARE GOLD
+ONLY LUCIO GETS
+NANO'ED
+
+SOMEBODY ONCE ASKED
+COULD I SWITCH OF HANZO NOW
+I JUST WANT A CHANCE AT WINNING THIS GAME
+
+I SAID YUP, WHAT A CONCEPT
+I COULD USE A COUPLE HEALS MYSELF
+AND WE COULD ALL USE A LITTLE
+REZ
+
+WELL
+
+THE HOOKS START COMING AND THEY DON'T STOP COMING
+YA GET HAMMER DOWN AND YA HIT THE GROUND STUNNIN'
+DIDN'T MAKE SENSE NOT TO PLAY FOR FUN
+YOUR RANK GOES UP BUT IT'S KIND OF DUMB
+
+SO MUCH TO DO
+SO MUCH TO SEE
+SO WHAT'S WRONG WITH BASTION ATTACKING
+
+YOU'LL NEVER KNOW IF YOU DON'T GO
+SR ONLY GETS SO LOW
+
+HEY NOW
+YOU'RE A TRA-STAR
+GET YOUR GAME ON
+RUN AWAY
+
+HEY NOW
+YOU'RE A GENJI
+YOU NEED HEALING
+PEEL FOR ANA PLEASE
+
+AND ALL MY WEAPONS ARE GOLD
+ONLY LUCIO GETS NANO'ED
+
+AND ALL MY WEAPONS ARE GOOOOOOLD
+ONLY LUCIO GETS
+NANO'ED
+"""
+
 DOOMFIST = """
 AND DEY SAY
 AND DEY SAY
@@ -243,7 +350,7 @@ HELP = """
     `.generate name`
 `.minesweeper [optional size]: Create a minesweeper game of a certain dimension. Default 5.`
 `.furi [text]: generate the furigana of a chunk of japanese text.`
-`.ripaudio [youtube_id]: rip and post the MP3 of a youtube video under 2GB.`
+`.ripaudio [youtube_id]: rip and post the MP3 of a youtube video under 1GB.`
     `.ripaudio gVEdQJ7qtJw`
 `.help`: Display this post
 """
@@ -337,6 +444,7 @@ COMMAND_KEYWORDS = {
     AIGIS+" love": lambda body: body.text("I only love "+ZALTU),
     AIGIS+" you know what time it is": lambda body: body.text("{author} time to get a new watch"),
     AIGIS+" sing song": lambda body: body.text(AIGIS_SONG),
+    AIGIS+" sing overwatch": lambda body: body.text(OW_SONG),
     AIGIS+" anime": lambda body: body.text(random.sample(ANIME, 1)[0]),
     AIGIS+" whats plus": lambda body: body.text("Twenty-one?"),
     AIGIS+" whats minus": lambda body: body.text("Twenty-one?"),
@@ -366,6 +474,6 @@ COMMAND_KEYWORDS = {
     ".furi": lambda body: body.furi(),
     ".minesweeper": lambda body: body.minesweeper(),
     ".help": lambda body: body.text(HELP),
-    "rlpls": lambda body: body.sigkill(),
+    "rlpls": lambda body: body.reload_plugin(),
     "dcpls": lambda body: body.sigkill(),
 }

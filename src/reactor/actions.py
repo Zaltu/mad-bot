@@ -97,6 +97,17 @@ class Reactor():
         """
         if self.delta["input"].author.id in ADMINID:
             self.parent.harmony.sigkill()
+            return
+        self.post("You can't tell me what to do.")
+
+    def reload_plugin(self):
+        """
+        Request the AIGIS core to reload a plugin.
+        Somewhat dangerous...
+        """
+        if self.delta["input"].author.id in ADMINID:
+            aigis.AIGISReload(self.delta["text"])
+            return
         self.post("You can't tell me what to do.")
 
     def games(self):
