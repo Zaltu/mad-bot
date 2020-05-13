@@ -212,7 +212,7 @@ BUT I STILL SHOOTIN'
 AND I STILL GETTIN' HEADSHOTS LIKE
 
 BOOM HEADSHOT
-BOOM HEASHOT
+BOOM HEADSHOT
 """
 HIGH_IQ_SHOTGUN = ("To be fair, you have to have a very high IQ to understand Shotgun. "
                    "The backend is extremely subtle, and without a solid grasp of theoretical "
