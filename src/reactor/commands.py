@@ -375,6 +375,7 @@ COMMAND_KEYWORDS = {
     "benedict cumberbatch": lambda body: body.text("Beneficial Cucumber"),
     "monster hunter": lambda body: body.text("{author} Shit game"),
     "monhun": lambda body: body.text("{author} Shit game"),
+    "monhunw": lambda body: body.text("{author} Shit game"),
     "hunmon": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
     "mon hun": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
     "mons hun": lambda body: body.text("{author} Still a bad game you ban-evading shitlord"),
