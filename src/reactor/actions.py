@@ -377,12 +377,14 @@ def _genesis_args(args):
     :rtype: dict
     """
     res = {}
+    n=0
     try:
-        for n in range(0, len(args)-1):
+        while n < len(args):
             t = args[n]
             while n+1 !=len(args) and "=" not in args[n+1]:
                 n+=1
                 t = " ".join([t]+[args[n]])
+            n+=1
             y = t.split("=")
             res[y[0]] = y[1]
     except Exception:  #pylint: disable=broad-except
