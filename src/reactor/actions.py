@@ -378,13 +378,13 @@ def _genesis_args(args):
     """
     res = {}
     try:
-        for arg in args:
-            kv = arg.split("=")
-            try:
-                kv[1] = int(kv[1])
-            except ValueError:
-                pass
-            res[kv[0]] = kv[1]
+        for n in range(0, len(args)-1):
+            t = args[n]
+            while n+1 !=len(args) and "=" not in args[n+1]:
+                n+=1
+                t = " ".join([t]+[args[n]])
+            y = t.split("=")
+            res[y[0]] = y[1]
     except Exception:  #pylint: disable=broad-except
         return {}
     return res
