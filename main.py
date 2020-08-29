@@ -29,13 +29,6 @@ class MADBot():
         :rtype: obj
         """
         print(delta.channel.id)
-        logtext = """Author:
-        {}
-        Channel:
-        {}
-        Content:
-        {}""".format(getattr(delta.author, "nick", delta.author.name), delta.channel.name, delta.content)
-        self.logger.debug(logtext)
         return self.reactor.process(delta)
 
 
