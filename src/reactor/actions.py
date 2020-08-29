@@ -47,10 +47,6 @@ class Reactor():
 
         :param str full_delta: explicit input
         """
-        if full_delta.author.id == AIGISID:
-            # Ignore self-driven actions
-            return
-
         # Set Body context
         self.delta = {
             'text': " ".join(full_delta.content.split(" ")[1:]),

@@ -9,7 +9,7 @@ import asyncio
 
 import discord
 
-from src.consts import DBPATH
+from src.consts import DBPATH, AIGISID
 
 
 MAX_LENGTH_MESSAGE = 1900
@@ -66,6 +66,9 @@ class Harmony(discord.Client):
 
         :param discord.message message: message received
         """
+        if message.author.id == AIGISID:
+            # Ignore self-driven actions
+            return
         async with message.channel.typing():
             self.on_message_callback(message)
 
