@@ -29,7 +29,8 @@ class MADBot():
         :rtype: obj
         """
         print(delta.channel.id)
-        return self.reactor.process(delta)
+        with delta.channel.typing():
+            return self.reactor.process(delta)
 
 
 def launch():
