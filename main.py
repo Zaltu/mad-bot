@@ -19,7 +19,7 @@ class MADBot():
         self.harmony.activate()
         self.habits = Habits(self.harmony)
 
-    def react(self, delta):
+    async def react(self, delta):
         """
         React to a sensory input.
 
@@ -29,7 +29,7 @@ class MADBot():
         :rtype: obj
         """
         print(delta.channel.id)
-        return self.reactor.process(delta)
+        return await self.reactor.process(delta)
 
 
 def launch():

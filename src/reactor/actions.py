@@ -41,7 +41,7 @@ class Reactor():
         self.post = lambda mess: self.parent.harmony.sendMessage(self.delta['channel'], mess)
         self.postfile = lambda mess, afile: self.parent.harmony.sendFile(self.delta['channel'], mess, afile)
 
-    def process(self, full_delta):
+    async def process(self, full_delta):
         """
         Filter for the incoming text message to parse it along Aigis' lines.
 
@@ -67,8 +67,9 @@ class Reactor():
                 command = key
 
         if command:
-            self.parent.logger.info("Responding to command: %s", command)
-            COMMAND_KEYWORDS[command](self)
+            async with full_delta.channel.typing():
+                self.parent.logger.info("Responding to command: %s", command)
+                COMMAND_KEYWORDS[command](self)
 
     def text(self, text):
         """

@@ -69,8 +69,7 @@ class Harmony(discord.Client):
         if message.author.id == AIGISID:
             # Ignore self-driven actions
             return
-        async with message.channel.typing():
-            self.on_message_callback(message)
+        await self.on_message_callback(message)
 
     async def aSendMessage(self, channel, message):
         """
