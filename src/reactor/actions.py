@@ -393,6 +393,10 @@ def _genesis_args(args):
                 t = " ".join([t]+[args[n]])
             n+=1
             y = t.split("=")
+            try:
+                y[1] = int(y[1])
+            except ValueError:
+                pass
             res[y[0]] = y[1]
     except Exception:  #pylint: disable=broad-except
         return {}
