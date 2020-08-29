@@ -475,6 +475,7 @@ COMMAND_KEYWORDS = {
     ".generate": lambda body: body.genesis(),
     ".furi": lambda body: body.furi(),
     ".minesweeper": lambda body: body.minesweeper(),
+    ".ai": lambda body: body.aitext(),
     ".help": lambda body: body.text(HELP),
     "rlpls": lambda body: body.reload_plugin(),
     "dcpls": lambda body: body.sigkill(),

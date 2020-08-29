@@ -289,6 +289,16 @@ class Reactor():
                 self.post(created)
         except (TypeError, KeyError):
             self.post("Unrecognized argument in\n%s" % kwargs)
+    
+    def aitext(self):
+        """
+        Auto-generate ML text using genesis AIText (wrapper).
+        """
+        try:
+            created = aigis.generate.text(self.delta["text"])
+            self.post(created)
+        except Exception:  #pylint: disable=broad-except
+            self.post("Unknown error occured, and process halted to preserve RAM.")
 
     def furi(self):
         """
