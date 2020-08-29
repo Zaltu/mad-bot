@@ -66,7 +66,8 @@ class Harmony(discord.Client):
 
         :param discord.message message: message received
         """
-        self.on_message_callback(message)
+        async with message.channel.typing():
+            self.on_message_callback(message)
 
     async def aSendMessage(self, channel, message):
         """
