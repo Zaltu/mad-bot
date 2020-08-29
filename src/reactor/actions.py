@@ -295,7 +295,7 @@ class Reactor():
         Auto-generate ML text using genesis AIText (wrapper).
         """
         try:
-            created = aigis.generate.text(self.delta["text"])
+            created = aigis.generate.text(self.delta["text"], random.randint(10, 75))
             self.post(created)
         except Exception:  #pylint: disable=broad-except
             self.post("Unknown error occured, and process halted to preserve RAM.")
