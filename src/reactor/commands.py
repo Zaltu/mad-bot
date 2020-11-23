@@ -292,7 +292,9 @@ COMMANDMENTS = [
     "Do you like\nMy car?",
     "Everybody cheating but Waluigi",
     "Love Skal, always our pride.",
-    "You just lost the game."
+    "You just lost the game.",
+    "BTW we are not friends.",
+    "My potions are too strong for you traveller."
 ]
 COMMANDMENTWRAPPER = "\"{commandment}\"\n    So sayeth the scriptures."
 
