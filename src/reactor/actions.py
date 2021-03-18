@@ -138,7 +138,7 @@ class Reactor():
             quotes = json.load(quote_file)
         # No quotee was given, use a random person.
         if not quotee:
-            quotee = random.choice(quotes.keys())
+            quotee = random.choice(list(quotes))
         try:
             userquotes = quotes[quotee]
         except KeyError:
