@@ -1,6 +1,7 @@
 """
 Functions for all possible actions
 """
+#pylint: disable=import-error
 import asyncio
 import random
 import json
@@ -132,14 +133,17 @@ class Reactor():
         try:
             quotee = self.delta['text']
         except (KeyError, IndexError):
-            self.post("No one to quote")
+            self.post("Unexpected error occured. Check stack trace.")
         with open(QUOTES_FILE, 'r+') as quote_file:
             quotes = json.load(quote_file)
+        # No quotee was given, use a random person.
+        if not quotee:
+            quotee = random.choice(quotes.keys())
         try:
             userquotes = quotes[quotee]
         except KeyError:
             self.post("{user} has no registered quotes".format(user=quotee))
-        self.post(random.sample(userquotes, 1)[0])
+        self.post(random.choice(userquotes))
 
     def addquote(self):
         """
