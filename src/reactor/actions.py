@@ -202,16 +202,15 @@ class Reactor():
     def weeb(self):
         """
         Posts one of the top results for a specific set of keywords from
-        a booru. Search order is Konachan -> Danbooru -> Gelbooru
-
-        NOT sfw filtered... Partially cause I'm not sure I know how.
-
-        String type return will eventually be deprecated in favor of
-        download/clean workflow for cleaner responses
+        a booru. Search order is Sankaku -> Konachan -> Gelbooru -> Danbooru
         """
         # Full text but pop the first element which should be the command
-        tags = "+".join(self.delta["text"].split(" "))
-        self.post(_kona(tags) or _booru(tags) or _gel(tags) or "No results " + LUIGIHANDS)
+        tags = self.delta["text"].split(" ")
+        try:
+            image_url = aigis.boorunator.boor(tags, rating=aigis.boorunator().ratings.SAFE)
+        except Exception as e:
+            image_url = str(e) + "\n" + LUIGIHANDS
+        self.post(image_url)
 
     def wiki(self):
         """
@@ -331,52 +330,6 @@ class Reactor():
             os.remove(fp)
         asyncio.ensure_future(wrapper())
 
-def _kona(tags):
-    """
-    Fetch image from konachan
-
-    :param str tags: tags to search for
-
-    :returns: image URL
-    :rtype: str
-    """
-    kona_chan = requests.get(KONA_URL.format(tags=tags)).json()
-    if kona_chan:
-        return kona_chan[0]['file_url']
-    return None
-
-
-def _booru(tags):
-    """
-    Fetch image from danbooru
-
-    :param str tags: tags to search for
-
-    :returns: image URL
-    :rtype: str
-    """
-    booru_chan = requests.get(BOORU_URL.format(tags=tags)).json()
-    if booru_chan:
-        return booru_chan[0]['file_url']
-    return None
-
-
-def _gel(tags):
-    """
-    Fetch image from gelbooru
-
-    :param str tags: tags to search for
-
-    :returns: image URL
-    :rtype: str
-    """
-    try:
-        gel_chan = requests.get(GEL_URL.format(tags=tags)).json()
-    except json.decoder.JSONDecodeError:
-        gel_chan = None
-    if gel_chan:
-        return gel_chan[0]['file_url']
-    return None
 
 def _genesis_args(args):
     """
