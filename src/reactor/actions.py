@@ -207,7 +207,7 @@ class Reactor():
         # Full text but pop the first element which should be the command
         tags = self.delta["text"].split(" ")
         try:
-            image_url = aigis.boorunator.boor(tags, rating=aigis.boorunator().ratings.SAFE)
+            image_url = aigis.boorunator.boor(tags, rating=aigis.boorunator.ratings.SAFE())
         except Exception as e:
             image_url = str(e) + "\n" + LUIGIHANDS
         self.post(image_url)
