@@ -205,11 +205,26 @@ class Reactor():
         a booru. Search order is Sankaku -> Konachan -> Gelbooru -> Danbooru
         """
         # Full text but pop the first element which should be the command
-        tags = self.delta["text"].split(" ")
+        rating = aigis.boorunator.ratings.SAFE()
+        if "rating" in self.delta["text"]:
+            groups = re.search("rating:[a-z]{4,}", self.delta["text"])
+            if groups:
+                rating = groups.group(0).split(":")[-1]
+                self.delta["text"] = self.delta["text"].replace(groups.group(0), "")
+        tags = self.delta["text"].split(",")
+        # clean our list...
+        tags = [tag.strip() for tag in tags]
+        while "" in tags:
+            tags.remove("")
         try:
-            image_url = aigis.boorunator.boor(tags, rating=aigis.boorunator.ratings.SAFE())
-        except Exception as e:
-            image_url = str(e) + "\n" + LUIGIHANDS
+            image_url = aigis.boorunator.boor(tags, rating=rating)
+        except Exception:
+            self._clean_async_file_upload(
+                os.path.join(DBPATH, 'luigifish.png'),
+                cleanup=False,
+                text="Nothing here but Luigi..."
+            )
+            return
         self.post(image_url)
 
     def wiki(self):
@@ -320,14 +335,15 @@ class Reactor():
             minesweeper.getMineField(dim, dim)
         )
 
-    def _clean_async_file_upload(self, fp, text="Here you go!"):
+    def _clean_async_file_upload(self, fp, cleanup=True, text="Here you go!"):
         async def wrapper():
             """
             Make sure the deletion of the temp file happens after the file is sent...
             """
             await self.parent.harmony.aSendFile(self.delta['channel'], fp, text)
-            # Cleanup so we don't have shit hanging around forever
-            os.remove(fp)
+            if cleanup:
+                # Cleanup so we don't have shit hanging around forever
+                os.remove(fp)
         asyncio.ensure_future(wrapper())
 
 

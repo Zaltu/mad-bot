@@ -341,8 +341,9 @@ HELP = """
 `.minecraft`: Display the information on how to connect to the MAD minecraft server
 `.aigif [tag]`: Post a gif based on the given tag.
     `.aigif pikachu`
-`.weeb [tags]`: Post an anime picture based on the tags provided (NSFW until I figure out how to filter it).
-    `.weeb cute neko`
+`.weeb [tags]`: Post an anime picture based on the tags provided. Character series should be in parentheses after the character's name.
+    `.weeb neko, black hair`
+    `.weeb mercy (overwatch), beach
 `.fortune`: Display your fortune
 `.edge`: Ow the edge
 `.teach [term]`: School some noobs on a subject
