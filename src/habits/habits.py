@@ -12,8 +12,6 @@ import datetime
 import os
 
 import discord
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from apscheduler.triggers.interval import IntervalTrigger as Every
 
 from src.consts import GENERAL, DBPATH, SPAMMYTESTS
 from src.habits.consts import SPECIAL_DAYS
@@ -27,14 +25,14 @@ class Habits():
     """
     def __init__(self, harmony):
         self.harmony = harmony
-        self.schedule = AsyncIOScheduler()
-        self.schedule.start()
-        self.populateScheduler()
+        # TODO
+        # This has never worked.
+        # Re-implement without questionable dependencies.
 
     def populateScheduler(self):
         """
         Add all jobs to scheduler
-        """
+
         self.schedule.add_job(
             luigifish,
             args=[self.harmony],
@@ -46,6 +44,7 @@ class Habits():
             args=[self.harmony],
             trigger=Every(days=1, start_date="2020-01-01T00:00:00")
         )
+        """
 
 
 async def luigifish(harmony):

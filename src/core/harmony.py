@@ -32,7 +32,7 @@ class Harmony(discord.Client):
         self.connectionThread = Thread(name="Start Thread", target=self._startConnection)
         self.endConnectionThread = Thread(name="End Thread", target=self._endConnection)
         self.on_message_callback = on_message_callback or default_on_message
-        super().__init__(D_INTENT)
+        super().__init__(intents=D_INTENT)
 
     def activate(self):
         """
@@ -45,7 +45,7 @@ class Harmony(discord.Client):
         Start discord connection
         """
         try:
-            self.loop.run_until_complete(self.start(self.token))
+            self.run(self.token)
         except RuntimeError as e:
             if "Event loop stopped before Future completed." not in str(e):
                 print(e)
@@ -54,10 +54,7 @@ class Harmony(discord.Client):
         """
         Ends the connection and should log off/close the websocket
         """
-        self.loop.stop()
-        while self.loop.is_running():
-            pass
-        self.loop.run_until_complete(self.logout())
+        asyncio.run(self.close())
 
     def set_on_message_callback(self, callback):
         """
