@@ -28,6 +28,7 @@ class MADBot():
         :returns: any response to the input from the context
         :rtype: obj
         """
+        print("Channel:")
         print(delta.channel.id)
         return await self.reactor.process(delta)
 

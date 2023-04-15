@@ -49,6 +49,8 @@ class Reactor():
         :param str full_delta: explicit input
         """
         # Set Body context
+        print(full_delta)
+        print(full_delta.content)
         self.delta = {
             'text': " ".join(full_delta.content.split(" ")[1:]),
             'channel': full_delta.channel,
@@ -60,6 +62,7 @@ class Reactor():
         words = set(words.split(" "))
         most = 0
         command = None
+        print(self.delta)
         for key in COMMAND_KEYWORDS:
             intNum = len(set(key.split(" ")).intersection(words))
             if len(key.split(" ")) == intNum and  most < intNum or (most == intNum and \
@@ -78,6 +81,7 @@ class Reactor():
 
         :param str text: the text to return
         """
+        print("Posting command")
         self.post(text.format(author=self.delta['author'],
                               channel=self.delta['channel'],
                               input=self.delta['input']))
