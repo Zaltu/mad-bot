@@ -29,7 +29,6 @@ class Harmony(discord.Client):
     """
     def __init__(self, on_message_callback=None):
         self.token = discordCreds()
-        self.connectionThread = Thread(name="Start Thread", target=self._startConnection)
         self.endConnectionThread = Thread(name="End Thread", target=self._endConnection)
         self.on_message_callback = on_message_callback or default_on_message
         super().__init__(intents=D_INTENT)
@@ -37,12 +36,6 @@ class Harmony(discord.Client):
     def activate(self):
         """
         Bring bot online
-        """
-        self.connectionThread.start()
-
-    def _startConnection(self):
-        """
-        Start discord connection
         """
         try:
             self.run(self.token)
