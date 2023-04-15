@@ -14,6 +14,13 @@ from src.consts import DBPATH, AIGISID
 
 MAX_LENGTH_MESSAGE = 1900
 
+# Welcome to the NSA
+D_INTENT = discord.Intents.default()
+D_INTENT.message_content = True
+D_INTENT.members = True
+D_INTENT.presences = True
+
+
 class Harmony(discord.Client):
     """
     Discord API wrapper
@@ -25,7 +32,7 @@ class Harmony(discord.Client):
         self.connectionThread = Thread(name="Start Thread", target=self._startConnection)
         self.endConnectionThread = Thread(name="End Thread", target=self._endConnection)
         self.on_message_callback = on_message_callback or default_on_message
-        super().__init__()
+        super().__init__(D_INTENT)
 
     def activate(self):
         """
