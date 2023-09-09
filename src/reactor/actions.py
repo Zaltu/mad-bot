@@ -49,8 +49,8 @@ class Reactor():
         :param str full_delta: explicit input
         """
         # Set Body context
-        print(full_delta)
-        print(full_delta.content)
+        #print(full_delta)
+        #print(full_delta.content)
         self.delta = {
             'text': " ".join(full_delta.content.split(" ")[1:]),
             'channel': full_delta.channel,
@@ -88,7 +88,7 @@ class Reactor():
 
     def owo(self):
         """
-        NYI
+        NYI TODO
         See Sagiri's owo command implementation
         """
         self.post("Nyaat yet impwemented " + LOWOGI)
@@ -309,15 +309,38 @@ class Reactor():
         except (TypeError, KeyError):
             self.post("Unrecognized argument in\n%s" % kwargs)
     
-    def aitext(self):
+    def aichat(self):
         """
-        Auto-generate ML text using genesis AIText (wrapper).
+        Auto-generate ML text using genesis AIText/chat ver. (wrapper).
         """
         try:
-            created = aigis.generate.text(self.delta["text"], random.randint(10, 75))
+            created = aigis.generate.chat(self.delta["text"])
             self.post(created)
         except Exception:  #pylint: disable=broad-except
             self.post("Unknown error occured, and process halted to preserve RAM.")
+    
+    def aiprompt(self):
+        """
+        Auto-generate ML text using genesis AIText/prompt ver. (wrapper).
+        """
+        try:
+            created = aigis.generate.prompt(self.delta["text"])
+            self.post(created)
+        except Exception:  #pylint: disable=broad-except
+            self.post("Unknown error occured, and process halted to preserve RAM.")
+    
+    def sdimage(self):
+        """
+        Generate stable-diffusion image through genesis a1111 wrapper.
+        """
+        print("Generating with params:")
+        print(self.delta["text"])
+        print(False)
+        print(os.path.join(DBPATH, "sdout"))
+        imgpaths = aigis.generate.image(prompt=self.delta["text"], hr_fix=False, saveto=os.path.join(DBPATH, "sdout"))
+        print(imgpaths)
+        for img in imgpaths:
+            self._clean_async_file_upload(img) # This will remove the img from disk too
 
     def furi(self):
         """
