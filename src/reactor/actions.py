@@ -335,9 +335,10 @@ class Reactor():
         """
         print("Generating with params:")
         print(self.delta["text"])
-        print(False)
-        print(os.path.join(DBPATH, "sdout"))
-        imgpaths = aigis.generate.image(prompt=self.delta["text"], hr_fix=False, saveto=os.path.join(DBPATH, "sdout"))
+        imgpaths = aigis.generate.image(command=self.delta["text"].replace("”", "\"").replace("“", "\""), saveto=os.path.join(DBPATH, "sdout"))
+        if isinstance(imgpaths, str):
+            self.post(imgpaths)
+            return
         print(imgpaths)
         for img in imgpaths:
             self._clean_async_file_upload(img) # This will remove the img from disk too
