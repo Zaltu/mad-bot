@@ -2,6 +2,7 @@
 Functions for all possible actions
 """
 #pylint: disable=import-error
+import subprocess
 import asyncio
 import random
 import json
@@ -12,6 +13,7 @@ import re
 import requests
 import wikipedia
 import youtube_dl
+import dns.resolver
 
 import aigis
 
@@ -28,7 +30,8 @@ KONA_URL = "https://konachan.com/post.json?page=1&limit=1&tags={tags}"
 BOORU_URL = "https://danbooru.donmai.us/posts.json?limit=1&page=1&tags={tags}"
 GEL_URL = "https://gelbooru.com//index.php?page=dapi&s=post&q=index&json=1&pid=1&limit=1&tags={tags}"
 
-
+DNS_RESOLVER = dns.resolver.Resolver()
+DNS_RESOLVER.nameservers = ["8.8.8.8"]
 
 class Reactor():
     """
@@ -109,6 +112,37 @@ class Reactor():
         """
         if self.delta["input"].author.id in ADMINID:
             aigis.AIGISReload(self.delta["text"])
+            return
+        self.post("You can't tell me what to do.")
+
+    def fetch_ip(self):
+        """
+        Fetch aigis.dev IP and current local IP for comparison.
+        Security risk. Alter with caution and do not expose more than necessary.
+        """
+        if self.delta["input"].author.id in ADMINID:
+            try:
+                ip = requests.get('https://api.ipify.org').content.decode('utf8')
+            except:
+                ip = "ERROR"
+            try:
+                dnsip = DNS_RESOLVER.resolve("aigis.dev").rrset.to_text().split(" ")[-1]
+            except:
+                dnsip = "ERROR"
+            self.post("Local IP: {}\naigis.dev IP: {}".format(ip, dnsip))
+            return
+        self.post("You can't tell me what to do.")
+
+    def launch_ddns(self):
+        """
+        Launch ddclient tool.
+        Security risk. Alter with caution and do not expose more than necessary.
+        """
+        if self.delta["input"].author.id in ADMINID:
+            proc = subprocess.Popen(["sudo", "/usr/sbin/ddclient"])
+            exitcode = proc.wait()
+            if exitcode != 0:
+                self.post(exitcode)
             return
         self.post("You can't tell me what to do.")
 

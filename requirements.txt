@@ -1,3 +1,4 @@
 discord.py
 wikipedia==1.4.0
 youtube_dl
+dnspython
