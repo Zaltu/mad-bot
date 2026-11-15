@@ -19,7 +19,7 @@ import aigis
 
 from src.consts import AIGISID, ADMINID, DBPATH
 from src.reactor.commands import LUIGIHANDS, LOWOGI, COMMAND_KEYWORDS
-from src.reactor import minesweeper
+from src.reactor import minesweeper, speech
 
 QUOTES_FILE = os.path.join(DBPATH, "quotes.json")
 MADCRAFT_FILE = os.path.join(DBPATH, "ip.config")
@@ -376,6 +376,12 @@ class Reactor():
         print(imgpaths)
         for img in imgpaths:
             self._clean_async_file_upload(img) # This will remove the img from disk too
+
+    def say(self):
+        print("Saying some shit")
+        print(self.delta["text"])
+        audio_file = speech.generate_audio(self.delta["text"], os.path.join(DBPATH, "speekout"))
+        self._clean_async_file_upload(audio_file)
 
     def furi(self):
         """
