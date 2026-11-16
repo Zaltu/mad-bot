@@ -382,6 +382,7 @@ COMMAND_KEYWORDS = {
     ".ai": lambda body: body.aiprompt(),
     ".image": lambda body: body.sdimage(),
     ".help": lambda body: body.text(HELP),
+    ".say": lambda body: body.say(),
     ".ip": lambda body: body.fetch_ip(),
     ".ddns": lambda body: body.launch_ddns(),
     "hewwo": lambda body: body.text("*notices {author}* OwO who's this?"),

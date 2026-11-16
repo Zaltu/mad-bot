@@ -1,6 +1,8 @@
 from omnivoice import OmniVoice, VoiceClonePrompt
 import soundfile as sf
 from torch import float16
+
+from src.consts import DBPATH
 import os
 
 MODEL = OmniVoice.from_pretrained(
@@ -8,7 +10,7 @@ MODEL = OmniVoice.from_pretrained(
     device_map="cuda:0",
     dtype=float16
 )
-VOICE_SAMPLE = VoiceClonePrompt.load("aigis_voice_sample.pt")
+VOICE_SAMPLE = VoiceClonePrompt.load(os.path.join(DBPATH, "aigis_voice_sample.pt"))
 
 def generate_audio(text, path=""):
     audio = MODEL.generate(text, voice_clone_prompt=VOICE_SAMPLE)

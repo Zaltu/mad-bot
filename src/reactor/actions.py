@@ -378,7 +378,10 @@ class Reactor():
             self._clean_async_file_upload(img) # This will remove the img from disk too
 
     def say(self):
-        print("Saying some shit")
+        """
+        Generate TTS of requested text using Aigis voice sample.
+        """
+        print("Talking MAD shit.")
         print(self.delta["text"])
         audio_file = speech.generate_audio(self.delta["text"], os.path.join(DBPATH, "speekout"))
         self._clean_async_file_upload(audio_file)
